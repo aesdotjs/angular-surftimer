@@ -1,0 +1,207 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row view-header player">
+            <div class="col-md-6">
+                <h1>{{player.name}}</h1>
+            </div>
+            <div class="col-md-6 prank">
+                <a ng-href="#/players/">Rank : {{player.rank}}/{{player.totalplayers}}</span><br/>
+                <a ng-href="#/players/{{player.countrycode}}" class="crank">cRank[{{player.countrycode}}] : {{player.crank}}/{{player.totalcplayers}}</a><br/>
+                <span class="points">{{player.totalpoints}} Points</span><br/>
+                <span class="steamid">{{player.steamid}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row view-header completion">
+            <div class="cpprogress" style="width : {{player.completionpercent | number:2}}%">&nbsp;</div>
+            <div class="col-md-5">
+                <h1>Completion</h1>
+            </div>
+            <div class="col-md-2 cp">
+                <span class="cppercent">{{player.completionpercent | number:2}}%</span>
+            </div>
+            <div class="col-md-5 cp">
+                <span class="cppoints">{{player.totalmappoints}} Points</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title wr">Map Completion</div>
+                    <div class="values">
+                        <div class="cpprogress" style="width : {{player.completemap/player.totalmap*100 | number:2}}%">&nbsp;</div>
+                        <span>{{player.completemap}}/{{player.totalmap}}</span>
+                        <span>{{player.completemap/player.totalmap*100 | number:2}}%</span>
+                        <span>{{player.mappoints}} Points</span>
+                    </div>
+                    <div class="timelistcont" scrolllist="0">
+                        <ul class="timelist">
+                            <li ng-repeat="time in player.completemaplist | orderBy:name | filter:searchTime1 | limitTo:max[0]" class="listanim">
+                                <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name}}</a>
+                                <span class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</span> 
+                            </li>
+                        </ul>
+                    </div>
+                    <input ng-model="searchTime1" class="inputdark aligncenter" placeholder="Search Time..."/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title stage">Stage Completion</div>
+                    <div class="values">
+                        <div class="cpprogress" style="width : {{player.completestage/player.totalstage*100| number:2}}%">&nbsp;</div>
+                        <span>{{player.completestage}}/{{player.totalstage}}</span>
+                        <span>{{player.completestage/player.totalstage*100| number:2}}%</span>
+                        <span>{{player.stagepoints}} Points</span>
+                    </div>
+                    <div class="timelistcont" scrolllist="1">
+                        <ul class="timelist">
+                            <li ng-repeat="time in player.completestagelist | orderBy: name | filter:searchTime2 | limitTo:max[1]" class="listanim">
+                                <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name}}</a>
+                                <span>{{time.sname}}</span>
+                                <span class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</span> 
+                            </li>
+                        </ul>
+                    </div>
+                    <input ng-model="searchTime2" class="inputdark aligncenter" placeholder="Search Time..."/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title bonus">Bonus Completion</div>
+                    <div class="values">
+                        <div class="cpprogress" style="width : {{player.completebonus/player.totalbonus*100| number:2}}%">&nbsp;</div>
+                        <span>{{player.completebonus}}/{{player.totalbonus}}</span>
+                        <span>{{player.completebonus/player.totalbonus*100| number:2}}%</span>
+                        <span>{{player.bonuspoints}} Points</span>
+                    </div>
+                    <div class="timelistcont" scrolllist="2">
+                        <ul class="timelist">
+                            <li ng-repeat="time in player.completebonuslist | orderBy:name | filter:searchTime3 | limitTo:max[2]" class="listanim">
+                                <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name}}</a>
+                                <span>B{{time.runID}}</span>
+                                <span class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</span> 
+                            </li>
+                        </ul>
+                    </div>
+                    <input ng-model="searchTime3" class="inputdark aligncenter" placeholder="Search Time..."/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row view-header records">
+            <div class="col-md-5">
+                <h1>Records</h1>
+            </div>
+            <div class="col-md-5 col-md-offset-2 cp">
+                <span class="recordpoints">{{player.totalpoints - player.totalmappoints}} Points</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title wr">WR Map</div>
+                    <div class="values">
+                        <span>{{player.topmap}} WRs</span>
+                        <span>{{player.topmap*250}} Points</span>
+                    </div>
+                    <div class="timelistcont" scrolllist="3">
+                        <ul class="timelist">
+                            <li ng-repeat="time in player.recordsmaplist | filter:searchTime4 | limitTo:max[3]" class="listanim">
+                                <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name}}</a>
+                                <span class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</span> 
+                            </li>
+                        </ul>
+                    </div>
+                    <input ng-model="searchTime4" class="inputdark aligncenter" placeholder="Search Time..."/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title stage">WR Stage</div>
+                    <div class="values">
+                        <span>{{player.topstage}} WRCPs</span>
+                        <span>{{player.topstage*25}} Points</span>
+                    </div>
+                    <div class="timelistcont" scrolllist="4">
+                        <ul class="timelist">
+                            <li ng-repeat="time in player.recordsstagelist | filter:searchTime5 | limitTo:max[4]" class="listanim">
+                                <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name}}</a>
+                                <span>{{time.sname}}</span>
+                                <span class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</span> 
+                            </li>
+                        </ul>
+                    </div>
+                    <input ng-model="searchTime5" class="inputdark aligncenter" placeholder="Search Time..."/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title bonus">WR Bonus</div>
+                    <div class="values">
+                        <span>{{player.topbonus}} WRBs</span>
+                        <span>{{player.topbonus*100}} Points</span>
+                    </div>
+                    <div class="timelistcont" scrolllist="5">
+                        <ul class="timelist">
+                            <li ng-repeat="time in player.recordsbonuslist | filter:searchTime6 | limitTo:max[5]" class="listanim">
+                                <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name}}</a>
+                                <span>B{{time.runID}}</span>
+                                <span class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</span> 
+                            </li>
+                        </ul>
+                    </div>
+                    <input ng-model="searchTime6" class="inputdark aligncenter" placeholder="Search Time..."/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="col-md-12">
+        <div class="row view-header records">
+            <div class="col-md-5">
+                <h1>Recent Records</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title wr">Recent Map Records</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title stage">Recent Stage Records</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title bonus">Recent Bonus Records</div>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+    <div class="col-md-12">
+        <div class="row view-header details">
+            <div class="col-md-5">
+                <h1>Details</h1>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="mapwidget details">
+                Time on the server: {{player.timeontheserver | secondsToDateTime | date:"M" | sub1}}m {{player.timeontheserver | secondsToDateTime | date:"d'd' HH'h' mm'm'"}}<br/>
+                First seen: {{player.firstseen | secondsToDateTime | date:'yyyy-MM-dd HH:mm:ss'}}<br/>
+                Connections: {{player.connections}}<br/>
+                Last connection: {{player.lastconnection | secondsToDateTime | date:'yyyy-MM-dd HH:mm:ss'}}
+            </div>
+        </div>
+    </div>
+</div>

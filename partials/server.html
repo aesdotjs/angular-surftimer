@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="row view-header server">
+	        <div class="col-md-12">
+                <a href="steam://connect/82.211.15.67:27240
+">
+	               <h1>{{info.HostName}}<br/>82.211.15.67:27240</h1>
+               </a>
+	        </div>
+	    </div>
+	</div>
+	<div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="stwidget" style="height:auto!important;max-height:auto!important;">
+                    <div class="title wr">Online Players</div>
+                    <div>
+                        <ul class="timelist">
+                            <li ng-repeat="player in players | orderBy:name" class="listanim">
+                                <a ng-href="#/player/{{player.id}}">{{player.Name}}</a>
+                                <span class="time">{{player.TimeF}}</span> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 serverinfo">
+            	<div class="stwidget">
+		            <span class="curmap">Map : <a ng-href="#/map/{{mapid}}">{{info.Map}}</a></span><br/>
+		            <span class="nextmap">Next Map : <a ng-href="#/map/{{nextmapid}}">{{rules.sm_nextmap}}</a></span><br/>
+		            <span class="playeronline">Online : {{players.length}}/24</span>
+		        </div>
+	        </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,280 @@
+{
+  "commands": [
+    {
+      "command": "!age",
+      "desc": "Display server statistics in chat."
+    },
+    {
+      "command": "!bans",
+      "desc": "Displays sourcebans page."
+    },
+    {
+      "command": "!bonus",
+      "desc": "Teleports you to a bonus in the map.  Usage: !bonus (Abbreviation: !b)"
+    },
+    {
+      "command": "!broken",
+      "desc": "Displays player's recently broken records.\n  Usage: !broken [target] (Abbreviation: !rb)"
+    },
+    {
+      "command": "!btop",
+      "desc": "Displays top times in a bonus.  Usage: !btop [mapname]  Example: !btop surf_lessons"
+    },
+    {
+      "command": "!ctop",
+      "desc": "Displays top countries by points."
+    },
+    {
+      "command": "!changes",
+      "desc": "Displays recent surftimer updates."
+    },
+    {
+      "command": "!cp",
+      "desc": "Displays player's current zone.  Usage: !cp [target]"
+    },
+    {
+      "command": "!cpr",
+      "desc": "Displays compare personal record menu.  Usage: !cpr [target/@maprank] [mapname]  Example: !cpr @10 surf_lessons"
+    },
+    {
+      "command": "!crank",
+      "desc": "Displays player's country rank in chat.  Usage: !crank [target]"
+    },
+    {
+      "command": "!getloc",
+      "desc": "Gets a player's location.  Usage: !getloc [target]"
+    },
+    {
+      "command": "!goback",
+      "desc": "Teleports you back one stage.  Usage: !goback (Abbreviation: !gb)"
+    },
+    {
+      "command": "!community",
+      "desc": "Displays the steamcommunity group."
+    },
+    {
+      "command": "!help",
+      "desc": "Displays surftimer commands."
+    },
+    {
+      "command": "!hide",
+      "desc": "Toggle visibility of other players."
+    },
+    {
+      "command": "!incomplete",
+      "desc": "Displays player's completion menu.  Usage: !incomplete [target]"
+    },
+    {
+      "command": "!info",
+      "desc": "Display surftimer informations"
+    },
+    {
+      "command": "!lastplayed",
+      "desc": "Displays recent played maps menu."
+    },
+    {
+      "command": "!lookup",
+      "desc": "Search for a player by name.  Usage: !lookup [name]  Example: !lookup Absolute"
+    },
+    {
+      "command": "!lookupsteamid",
+      "desc": "Search for a player by steamid.  Usage: !lookupsteamid [steamid]  Example: !lookupsteamid STEAM_0:0:4442884"
+    },
+    {
+      "command": "!m",
+      "desc": "Displays map information in chat.  Usage: !m [mapname]  Example: !m surf_lessons"
+    },
+    {
+      "command": "!mapinfo",
+      "desc": "Displays map information menu.  Usage: !mapinfo [mapname] (Abbreviation: !mi)  Example: !mi surf_lessons"
+    },
+    {
+      "command": "!maplist",
+      "desc": "Displays a list of maps and their tiers."
+    },
+    {
+      "command": "!mostcontested",
+      "desc": "Displays most played maps menu."
+    },
+    {
+      "command": "!mostplayed",
+      "desc": "Displays most played maps menu."
+    },
+    {
+      "command": "!mrank",
+      "desc": "Displays player's map rank in chat.  Usage: !mrank [target/@rank] [mapname]  Example: !mrank @10 surf_lessons"
+    },
+    {
+      "command": "!mtop",
+      "desc": "Displays main map menu.  Usage: !mtop [mapname]  Example: !mtop surf_lessons"
+    },
+    {
+      "command": "!next",
+      "desc": "Displays next player's menu.  Usage: !next [target/@rank]  Example: !next @10"
+    },
+    {
+      "command": "!noclip",
+      "desc": "Toggle noclip."
+    },
+    {
+      "command": "!nvgs",
+      "desc": "Receive nightvision goggles."
+    },
+    {
+      "command": "!pc",
+      "desc": "Displays player's percent completion.  Usage: !pc [target]"
+    },
+    {
+      "command": "!player",
+      "desc": "Displays player's rank menu.  Usage: !player [target/@rank] (Abbreviation: !p)"
+    },
+    {
+      "command": "!playerinfo",
+      "desc": "Displays player's information menu.  Usage: !playerinfo [target/@rank] (Abbreviation: !pi)"
+    },
+    {
+      "command": "!playtime",
+      "desc": "Displays player's playtime in chat.  Usage: !playtime [target/@rank]  Example: !playtime @10"
+    },
+    {
+      "command": "!points",
+      "desc": "Displays points award menu."
+    },
+    {
+      "command": "!pr",
+      "desc": "Displays player's personal record on a map.  Usage: !pr [target/@maprank] [mapname]  Example: !pr @10 surf_lessons"
+    },
+    {
+      "command": "!rank",
+      "desc": "Displays player's rank in chat.  Usage: !rank [target/@rank]  Example: !rank @10"
+    },
+    {
+      "command": "!ranks",
+      "desc": "Displays chatranks menu."
+    },
+    {
+      "command": "!reports",
+      "desc": "Displays recent record reports."
+    },
+    {
+      "command": "!restart",
+      "desc": "Return to the beginning of the map."
+    },
+    {
+      "command": "!rr",
+      "desc": "Displays recent map records menu."
+    },
+    {
+      "command": "!rrb",
+      "desc": "Displays recent bonus records menu."
+    },
+    {
+      "command": "!rrcp",
+      "desc": "Displays recent stage records menu."
+    },
+    {
+      "command": "!rrtop10",
+      "desc": "Displays recent top10 records menu."
+    },
+    {
+      "command": "!rp",
+      "desc": "Displays recent set records menu."
+    },
+    {
+      "command": "!rules",
+      "desc": "Displays server rules."
+    },
+    {
+      "command": "!saveloc",
+      "desc": "Saves your location.  Usage: !saveloc [<origin x y z><angle p y r><velocity x y z>]"
+    },
+    {
+      "command": "!search",
+      "desc": "Search the command list for the given string of text.  Usage: !search [text]"
+    },
+    {
+      "command": "!settings",
+      "desc": "Displays surftimer settings configuration menu."
+    },
+    {
+      "command": "!spec",
+      "desc": "Spectate specific player.  Usage: !spec [target]"
+    },
+    {
+      "command": "!specinfo",
+      "desc": "Displays player's spectators.  Usage: !specinfo [target]"
+    },
+    {
+      "command": "!speed",
+      "desc": "Displays speed menu."
+    },
+    {
+      "command": "!stage",
+      "desc": "Teleports you to a stage in the map and enables practice mode.  Usage: !stage (Abbreviation: !s)"
+    },
+    {
+      "command": "!surftop",
+      "desc": "Displays top player's by points.  Usage: !surftop (Abbreviation: !st)"
+    },
+    {
+      "command": "!teleport",
+      "desc": "Teleports you to the start of your current stage."
+    },
+    {
+      "command": "!tele",
+      "desc": "Teleports to location.  Usage: !tele [#location]  Example: !tele #10"
+    },
+    {
+      "command": "!thetime",
+      "desc": "Displays current server time."
+    },
+    {
+      "command": "!timeleft",
+      "desc": "Displays time left until map end."
+    },
+    {
+      "command": "!timer",
+      "desc": "Disables your surftimer."
+    },
+    {
+      "command": "!topwr",
+      "desc": "Displays player's by number of WRs."
+    },
+    {
+      "command": "!topwrb",
+      "desc": "Displays player's by number of WRBs."
+    },
+    {
+      "command": "!topwrcp",
+      "desc": "Displays player's by number of WRCPs."
+    },
+    {
+      "command": "!top",
+      "desc": "Displays top times in a map.  Usage: !top [mapname]  Example: !top surf_lessons"
+    },
+    {
+      "command": "!toptop10",
+      "desc": "Displays player's by amount of Top10 points."
+    },
+    {
+      "command": "!vipinfo",
+      "desc": "Displays vip informations."
+    },
+    {
+      "command": "!welcome",
+      "desc": "Displays welcome menu."
+    },
+    {
+      "command": "!wr",
+      "desc": "Displays the WR on a map.  Usage: !wr [mapname]  Example: !wr surf_lessons"
+    },
+    {
+      "command": "!wrb",
+      "desc": "Displays the WRB on a map.  Usage: !wrb [#bonusnumber] [mapname]  Example: !wrb #2 surf_lessons"
+    },
+    {
+      "command": "!youtube",
+      "desc": "Displays our youtube channel."
+    }
+  ]
+}

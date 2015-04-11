@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="surftimer" ng-app lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/normalize.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="css/ngProgress.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400|Audiowide:400" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+    <title>Nightmare surf statistics</title>
+</head>
+<body ng-controller="mainCtrl">
+    <div class="container-fluid">
+        <div class="row">
+             <div id="panel" class="col-md-12">
+                <div class="row">
+                    <div id="logo" class="col-md-3">
+                        <a href="http://forum.nightmare-surf.com/index.php"><img src="http://forum.nightmare-surf.com/images/intoxfusion/logo.png" alt="Nightmare-Surf Forums" title="Nightmare-Surf Forums"></a>
+                    </div>
+                    <div class="col-md-4 col-md-offset-5 userinfo" ng-controller="userCtrl">
+                        <a ng-if="!logged" ng-click="login()" href="services/login" target="_blank" class="steamlogin"><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png"/></a> 
+                        <div class="user row" ng-if="logged">
+                            <div class="name">
+                                <a ng-href="#/player/{{user.playerid}}" class="pull-right"> <img src="{{user.avatarmedium}}"/></a>
+                                <div class="info pull-right">
+                                    <a ng-href="#/player/{{user.playerid}}" class="pull-right">                      
+                                        <span>
+                                            {{user.personaname}}
+                                        </span>
+                                    </a><br/><br/>
+                                    <a href="{{user.profileurl}}" target="_blank">Steam profile</a>
+                                    <a ng-click="logout()">Logout</a>
+                                </div>  
+                            </div>                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 nopadding menu-cont">
+                <nav ng-controller="menuCtrl">
+                    <ul class="menu-left">
+                        <li ng-class="menuClass('')"><a ng-href="#/">Home</a></li>
+                        <li ng-class="menuClass('maps')||menuClass('map')">
+                            <a ng-href="#/maps" ng-click="showMaps()">Maps</a>
+                            <input ng-model="searchMap" class="inputdark pull-right" placeholder="Search Maps..."/>
+                            <ul class="submenu" ng-show="toggleMaps" scrolllist="0">
+                                <li ng-repeat="map in maps  | filter:searchMap | orderBy:map.name | limitTo:maxm:minm" class="listanim">
+                                    <a ng-href="#/map/{{map.id}}">{{map.name}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ng-class="menuClass('players')||menuClass('player')">
+                            <a ng-href="#/players" ng-click="showPlayers()">Players</a>
+                            <input ng-model="searchtext" class="inputdark pull-right" placeholder="Search Players..."/>
+                            <ul class="submenu" ng-show="togglePlayers" scrolllist="1">
+                                <li ng-repeat="player in players | orderBy:player.name" class="listanim">
+                                    <a ng-href="#/player/{{player.id}}">{{player.name}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ng-class="menuClass('server')"><a ng-href="#/server">Server</a></li>
+                        <li ng-class="menuClass('rules')"><a ng-href="#/rules">Rules</a></li>
+                        <li ng-class="menuClass('commands')"><a ng-href="#/commands">Commands</a></li>
+                        <li ng-class="menuClass('donate')"><a ng-href="#/donate">Donate</a></li>
+                        <li ng-class="menuClass('credits')"><a ng-href="#/credits">Credits</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-9">
+                <div ng-view="" id="ng-view" class="viewanim"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="app/ngProgress.min.js"></script>    
+    <script src="app/app.js"></script>
+    <script src="app/filters.js"></script>
+    <script src="app/services.js"></script>
+    <script src="app/player.js"></script>   
+    <script src="app/map.js"></script>             
+    <script src="app/donate.js"></script>             
+    <script src="app/home.js"></script>       
+    <script src="app/server.js"></script>        
+</body>
+</html>

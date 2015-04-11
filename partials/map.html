@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row view-header map">
+            <div class="col-md-8">
+                <div class="mapname">{{map.name}} <span ng-if="map.creator != 0">(by {{map.creator}})</span></div>
+                <div class="tier">Tier {{map.tier}}</div>
+            </div>
+            <div class="col-md-4">
+                <div class="mapinfo">
+                    Last Played : {{map.lastconnection |secondsToDateTime | date:'yyyy-MM-dd HH:mm:ss' }}<br/>
+                    Total time played: {{map.timeontheserver |secondsToDateTime | date:"d 'd' HH:mm:ss" }}<br/>
+                    Time played : {{map.connections}}<br/>
+                    Contested : {{map.contested}}<br />
+                    Completion : {{map.completion}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 col-sm-6">
+        <div class="stwidget">
+            <div class="title wr">MAP WR</div>
+            <div class="timelistcont" scrolllist="0,0">
+                <ul class="timelist">
+                    <li ng-repeat="time in map.times | filter:searchMap | limitTo:mapmax" class="listanim">
+                        <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                        <span class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</span>
+                        <span class="rank">{{ $index+1 }}</span>
+                    </li>
+                </ul>
+            </div>
+            <input ng-model="searchMap" class="inputdark aligncenter" placeholder="Search Time..."/>
+        </div>
+    </div>
+    <div ng-repeat="stage in stages | filter:'Stage'"class="col-md-4  col-sm-6 widgetanim">
+        <div class="stwidget">   
+            <div class="title stage">{{stage.name}}</div>
+            <div class="timelistcont" scrolllist="1,{{$index}}">
+                <ul class="timelist">
+                    <li ng-repeat="time in stage.times | filter:searchStage | limitTo:stagemax[$index]" class="listanim">
+                        <a ng-href="#/player/{{time.id}}">{{time.name| limitTo:20:0}}</a>
+                        <span class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</span>
+                        <span class="rank">{{ $index+1 }}</span>
+                    </li>
+                </ul>
+            </div>
+            <input ng-model="searchStage" class="inputdark aligncenter" placeholder="Search Time..."/>
+        </div>
+    </div>
+    <div ng-repeat="bonus in bonus"class="col-md-4 col-sm-6 widgetanim">
+        <div class="stwidget">   
+            <div class="title bonus">{{bonus.name}}</div>
+            <div class="timelistcont" scrolllist="2,{{$index}}">
+                <ul class="timelist">
+                    <li ng-repeat="time in bonus.times | filter:searchBonus | limitTo:bonusmax[$index]" class="listanim">
+                        <a ng-href="#/player/{{time.playerid}}">{{time.name | limitTo:20:0}}</a>
+                        <span class="time">{{time.time | secondsToDateTime | date:'mm:ss.sss'}}</span>
+                        <span class="rank">{{ $index+1 }}</span>
+                    </li>
+                </ul>
+            </div>
+            <input ng-model="searchBonus" class="inputdark aligncenter" placeholder="Search Time..."/>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="row viewdonate">
+	<div class="col-md-12">
+        <div class="row view-header rules">
+            <div class="col-md-12">
+                <h1>Donate</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-md-offset-3">
+    	<div id="formContainer">
+            <form id="donationForm" class="formGen" action="https://www.paypal.com/cgi-bin/webscr" method="post" ng-submit="submit()">
+                <input type="hidden" value="_donations" name="cmd">
+                <input type="hidden" value="nmsurf.donations@gmail.com" name="business">
+                <input type="hidden" value="0" name="no_shipping">
+                <input type="hidden" value="EUR" name="currency_code">
+                <input type="hidden" value="US" name="lc">
+                <input type="hidden" ng-value="amount" name="amount">
+                <input type="hidden" value="" id="custom" name="custom">
+                <a name="lower"></a>
+
+                <div class="formRow">
+                    <input type="text" class="textField required" id="item_name" name="item_name" ng-model="name" placeholder="Steam Nickname" required="">
+                </div>
+
+                <div class="formRow">
+                    <input type="text" ng-model="steamid" ng-blur="checkSteamId()" class="textField required email" ng-class="isValid()" id="item_number" name="item_number" placeholder="SteamID" required=""/>
+                </div>
+
+                <div class="formRow" ng-show="isValid() === 'invalid'">{{checktext}} </div>
+
+                <div class="row">
+                	<div class="col-md-3">
+                		<div class="plan" ng-click="setPlan(1)" ng-class="planClass(1)">3<br/>Months</div>
+                	</div>
+                	<div class="col-md-3">
+                		<div class="plan" ng-click="setPlan(2)" ng-class="planClass(2)">6<br/>Months</div>
+                	</div>
+                	<div class="col-md-3">
+                		<div class="plan" ng-click="setPlan(3)" ng-class="planClass(3)">10<br/>Months</div>
+                	</div>
+                	<div class="col-md-3">
+                		<div class="plan" ng-click="setPlan(4)" ng-class="planClass(4)">Life<br/>Time</div>
+                	</div>
+                </div>
+                
+                
+                
+                
+                <div class="row"><div id="costinfo" class="col-md-2 col-md-offset-5">&euro;{{amount}}.00</div></div>
+                <div class="formRow">
+                    <input type="submit" id="submit" value="Donate">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

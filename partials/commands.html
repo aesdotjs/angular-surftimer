@@ -1,0 +1,24 @@
+<div class="row rulesview">
+    <div class="col-md-12">
+        <div class="row view-header rules">
+            <div class="col-md-12">
+                <h1>Commands</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 col-md-offset-7 sort-bar">
+        <input ng-model="searchCommand" class="inputdark pull-right" placeholder="Search Commands..."/>
+    </div>
+    <div class="col-md-8 col-md-offset-1">
+        <table class="command-table">
+            <tr class="head">
+                <th>Command</th>
+                <th>Description</th>
+            </tr>
+            <tr ng-repeat="command in commands | filter:searchCommand">
+                <td>{{command.command}}</td>
+                <td>{{command.desc}}</td>
+            </tr>
+        </table>
+    </div> 
+</div>
