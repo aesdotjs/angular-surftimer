@@ -97,10 +97,13 @@ app.factory("services", ['$http', function($http) {
   obj.logout = function(){
     return $http.get(serviceBase + 'logout');
   }
+  obj.getWidget = function(type){
+    return $http.get(serviceBase + 'widget?type='+type);
+  }
   return obj;   
 }]);
 
-app.factory("user", ['$http', function($http) {
+app.factory("user", ['$http','$rootScope', function($http,$rootScope) {
   var serviceBase = 'services/';
   var obj = {};
   obj.logged=false;
@@ -111,6 +114,7 @@ app.factory("user", ['$http', function($http) {
       {
         obj.user=data.data;
         obj.logged=true;
+        $rootScope.$broadcast('user:updated',obj.user.playerid);
         return true;
       }
       return false;
@@ -120,8 +124,83 @@ app.factory("user", ['$http', function($http) {
     $http.get(serviceBase + 'logout').then(function(data){
       obj.logged=false;
       obj.user={};
+      $rootScope.$broadcast('user:logout','logout');
     });
   }
+  obj.isAdmin = function(){
+    return $http.get(serviceBase + 'admincheck');
+  }
+  return obj;   
+}]);
+app.factory("news", ['$http', function($http) {
+  var serviceBase = 'services/';
+  var obj = {};
+  obj.getNews = function(newsid){
+    return $http.get(serviceBase + 'news?id='+newsid);
+  }
+  obj.getNewsPage = function(page){
+    return $http.get(serviceBase + 'newspage?page='+page);
+  }
+  obj.addNews = function(title,body){
+    return $http.post(serviceBase+'addnews',{
+      'body' : body,
+      'title' : title
+    });
+  };
+  obj.delNews = function(id){
+    return $http.post(serviceBase+'delnews',{
+      'newsid' : id
+    });
+  };
+  obj.updateNews = function(id,body){
+    return $http.post(serviceBase+'updatenews',{
+      'body' : body,
+      'newsid' : id
+    });
+  };
+  obj.updateNewsTitle = function(id,title){
+    return $http.post(serviceBase+'updatenewstitle',{
+      'title' : title,
+      'newsid' : id
+    });
+  };
+  return obj;   
+}]);
+app.factory("comment", ['$http','$rootScope','$routeParams','$location', function($http,$rootScope,$routeParams,$location) {
+  var serviceBase = 'services/';
+  var obj = {};
+  obj.getTypeId = function(){
+    obj.type = $location.path().split('/')[1];
+    obj.itemId = $routeParams.id;
+  }
+  
+  obj.getComments = function(){
+    obj.getTypeId();
+    return $http.get(serviceBase + 'comments?type='+obj.type+'&itemid='+obj.itemId);
+  };
+  obj.getLatestComments = function(page){
+     return $http.get(serviceBase + 'latestcomments?page='+page);
+  }
+  obj.addComment = function(body,parentid){
+    return $http.post(serviceBase+'addcomment',{
+      'comment' : body,
+      'parentid' : parentid,
+      'type' : obj.type,
+      'itemid' : obj.itemId
+    });
+  };
+  obj.delComment = function(id){
+    return $http.post(serviceBase+'delcomment',{
+      commentid : id
+    });
+  };
+  obj.updateComment = function(id,body){
+    return $http.post(serviceBase+'updatecomment',{
+      comment : body,
+      commentid : id
+    });
+  };
+  obj.getTypeId();
   return obj;   
 }]);
 
@@ -159,9 +238,24 @@ app.factory('Progress', function (ngProgress) {
     };
 });
 
+app.factory("errorService", [ function() {
+  var obj = {};
+  obj.error="";
+  obj.errorlog=[];
+  obj.setError = function(errorstring){
+    obj.error=errorstring;
+  }
+  obj.delError = function(){
+    obj.errorlog.push(obj.error);
+    obj.error="";
+  }
+  return obj;   
+}]);
+
 app.factory('interceptorNgProgress', function ($injector) {
   var complete_progress, getNgProgress, ng_progress, working;
   ng_progress = null;
+  errorService = null;
   working = false;
 
   getNgProgress = function() {
@@ -178,6 +272,16 @@ app.factory('interceptorNgProgress', function ($injector) {
       return working = false;
     }
   };
+
+  getErrorService = function() {
+    errorService = errorService || $injector.get("errorService");
+    return errorService;
+  };
+
+  updateError = function(errorstring){
+    var errorService=getErrorService();
+    errorService.setError(errorstring);
+  }
 
   return {
     request: function(request) {
@@ -203,6 +307,8 @@ app.factory('interceptorNgProgress', function ($injector) {
     },
     responseError: function(response) {
       complete_progress();
+      if(response.data && response.data.error)
+        updateError(response.data.error);
       return response;
     }
   }

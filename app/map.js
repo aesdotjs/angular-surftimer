@@ -13,11 +13,18 @@ app.controller('mapsCtrl',['$scope','services', function ($scope, services) {
   });
 }]);
 
-app.controller('mapCtrl',['$scope','services', '$routeParams', function ($scope, services, $routeParams) {
+app.controller('mapCtrl',['$scope','services', '$routeParams','$location','user', function ($scope, services, $routeParams,$location, user) {
   var currentid=$routeParams.id;
+  $scope.playerid=$routeParams.playerid || user.user.playerid;
   $scope.mapmax=50;
+  $scope.nulldate=new Date(0);
   $scope.stagemax=[];
   $scope.bonusmax=[];
+  $scope.$on('user:updated', function(event,data) {
+    if($scope.playerid>0)
+      return;
+    $scope.playerid = user.user.playerid;
+  });
   $scope.loadMore = function(type,nb){
     if(type === 0)
       $scope.mapmax+=50;
@@ -27,40 +34,76 @@ app.controller('mapCtrl',['$scope','services', '$routeParams', function ($scope,
       $scope.bonusmax[nb]+=50;
   }
   services.getMap(currentid).then(function(data){
-    $scope.map = data.data;
-    services.getMapCompletion(currentid).then(function(data){
-      $scope.map.completion=data.data[0].cnt;
-    });
-    services.getMapRecords(currentid,0).then(function(data){
-      $scope.map.times = data.data;
-    });
-
-    services.getMapStages(currentid).then(function(data){
-      $scope.stages = data.data;
-      angular.forEach($scope.stages,function(stage,key){
-        services.getMapStageRecords(stage.id).then(function(data){
-          stage.times=[];
-          stage.times=data.data;
-          $scope.stagemax[key]=50;
-        });
+    if(data.data.id){
+      $scope.map = data.data;
+      services.getMapCompletion(currentid).then(function(data){
+        $scope.map.completion=data.data[0].cnt;
       });
-    });
+      services.getMapRecords(currentid,0).then(function(data){
+        if(data.data){
+          var tmpres = data.data;
+          for (var i = tmpres.length - 1; i >= 0; i--) {
+            if(tmpres[i].id==$scope.playerid)
+            {
+              tmpres.unshift(tmpres[i]);
+              tmpres.splice(i+1,1);
+            }
+          }
+          $scope.map.times=tmpres;
+        }
+      });
 
-    services.getMapBonuses(currentid).then(function(data){
-      $scope.bonus = data.data;
-      angular.forEach($scope.bonus,function(bonus,key){
-        $scope.bonusmax[key]=50;
-        if(!bonus.times)
-          bonus.times=[];
-        services.getMapRecords(currentid,bonus.runID).then(function(data){
-          if(data.data)
-          {
-            angular.forEach(data.data, function(data,key){
-              bonus.times.push({time:data.duration,playerid:data.id,name:data.name});
+      services.getMapStages(currentid).then(function(data){
+        if(data.data){
+          $scope.stages = data.data;
+          angular.forEach($scope.stages,function(stage,key){
+            services.getMapStageRecords(stage.id).then(function(data){
+              if(data.data){
+                stage.times=[];
+                stage.times=data.data;
+                $scope.stagemax[key]=50;
+                for (var i = stage.times.length - 1; i >= 0; i--) {
+                  if(stage.times[i].id==$scope.playerid)
+                  {
+                    stage.times.unshift(stage.times[i]);
+                    stage.times.splice(i+1,1);
+                  }
+                }
+              }
             });
-          }              
-        });
+          });
+        }
       });
-    });
+
+      services.getMapBonuses(currentid).then(function(data){
+        if(data.data){
+          $scope.bonus = data.data;
+          angular.forEach($scope.bonus,function(bonus,key){
+            $scope.bonusmax[key]=50;
+            if(!bonus.times)
+              bonus.times=[];
+            services.getMapRecords(currentid,bonus.runID).then(function(data){
+              if(data.data)
+              {
+                angular.forEach(data.data, function(data,keyb){
+                  bonus.times.push({time:data.duration,playerid:data.id,name:data.name,rank:data.rank});
+                });
+                for (var i = bonus.times.length - 1; i >= 0; i--) {
+                  if(bonus.times[i].playerid==$scope.playerid)
+                  {
+                    bonus.times.unshift(bonus.times[i]);
+                    bonus.times.splice(i+1,1);
+                  }
+                }
+              }              
+            });
+          });
+        }
+      });
+    }
+    else
+    {
+      $location.path('/maps/').replace();
+    }
   });
 }]);

@@ -2,6 +2,7 @@
 <html ng-app="surftimer" ng-app lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/normalize.min.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
@@ -11,41 +12,47 @@
     <title>Nightmare surf statistics</title>
 </head>
 <body ng-controller="mainCtrl">
-    <div class="container-fluid">
-        <div class="row">
-             <div id="panel" class="col-md-12">
-                <div class="row">
-                    <div id="logo" class="col-md-3">
-                        <a href="http://forum.nightmare-surf.com/index.php"><img src="http://forum.nightmare-surf.com/images/intoxfusion/logo.png" alt="Nightmare-Surf Forums" title="Nightmare-Surf Forums"></a>
-                    </div>
-                    <div class="col-md-4 col-md-offset-5 userinfo" ng-controller="userCtrl">
-                        <a ng-if="!logged" ng-click="login()" href="services/login" target="_blank" class="steamlogin"><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png"/></a> 
-                        <div class="user row" ng-if="logged">
-                            <div class="name">
-                                <a ng-href="#/player/{{user.playerid}}" class="pull-right"> <img src="{{user.avatarmedium}}"/></a>
-                                <div class="info pull-right">
-                                    <a ng-href="#/player/{{user.playerid}}" class="pull-right">                      
-                                        <span>
-                                            {{user.personaname}}
-                                        </span>
-                                    </a><br/><br/>
-                                    <a href="{{user.profileurl}}" target="_blank">Steam profile</a>
-                                    <a ng-click="logout()">Logout</a>
-                                </div>  
-                            </div>                      
-                        </div>
+    <div class="navbar navbar-default navbar-fixed-top panel" role="navigation">
+        <div class="container-fluid">
+            <div class="row">
+                <button type="button" class="navbar-toggle" ng-click="toggleMenu=!toggleMenu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div id="logo" class="col-md-7 col-sm-6 col-xs-12">
+                    <a href="http://forum.nightmare-surf.com/index.php"><img src="http://forum.nightmare-surf.com/images/intoxfusion/logo.png" alt="Nightmare-Surf Forums" title="Nightmare-Surf Forums"></a>
+                </div>
+                <div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-2 col-xs-6  userinfo" ng-controller="userCtrl" ng-if="desktop">
+                    <a ng-if="!logged" ng-click="login()" href="services/login" target="_blank" class="steamlogin"><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png"/></a> 
+                    <div class="user row" ng-if="logged">
+                        <div class="name">
+                            <a ng-href="#/player/{{user.playerid}}" class="pull-right"> <img src="{{user.avatarmedium}}"/></a>
+                            <div class="info pull-right">
+                                <a ng-href="#/player/{{user.playerid}}" class="pull-right">                      
+                                    <span>
+                                        {{user.personaname}}
+                                    </span>
+                                </a><br/><br/>
+                                <a href="{{user.profileurl}}" target="_blank">Steam profile</a>
+                                <a ng-click="logout()">Logout</a>
+                            </div>  
+                        </div>                      
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3 nopadding menu-cont">
+    </div>
+    <div class="container-fluid" id="page">
+        <div class="row row-offcanvas row-offcanvas-left" ng-class="toggleMenu?'active':''">
+            <div class="col-sm-3 col-md-3 col-xs-6 sidebar-offcanvas nopadding menu-cont" role="navigation">
                 <nav ng-controller="menuCtrl">
                     <ul class="menu-left">
                         <li ng-class="menuClass('')"><a ng-href="#/">Home</a></li>
+                        <li ng-class="menuClass('news')"><a ng-href="#/news">News</a></li>
                         <li ng-class="menuClass('maps')||menuClass('map')">
                             <a ng-href="#/maps" ng-click="showMaps()">Maps</a>
-                            <input ng-model="searchMap" class="inputdark pull-right" placeholder="Search Maps..."/>
+                            <input ng-model="searchMap" class="inputdark pull-right" placeholder="Search Maps..."  ng-click="showMaps()"/>
                             <ul class="submenu" ng-show="toggleMaps" scrolllist="0">
                                 <li ng-repeat="map in maps  | filter:searchMap | orderBy:map.name | limitTo:maxm:minm" class="listanim">
                                     <a ng-href="#/map/{{map.id}}">{{map.name}}</a>
@@ -68,24 +75,59 @@
                         <li ng-class="menuClass('credits')"><a ng-href="#/credits">Credits</a></li>
                     </ul>
                 </nav>
+                <div class="col-md-12 userinfo mobile" ng-controller="userCtrl" ng-if="mobile">
+                    <a ng-if="!logged" ng-click="login()" href="services/login" target="_blank" class="steamlogin"><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png"/></a> 
+                    <div class="user row" ng-if="logged">
+                        <div class="name col-md-12">
+                            <div class="row">
+                                <a ng-href="#/player/{{user.playerid}}" class="col-xs-3"> <img src="{{user.avatar}}"/></a>
+                                <div class="info pull-left">
+                                    <a ng-href="#/player/{{user.playerid}}">                      
+                                        <span>
+                                            {{user.personaname}}
+                                        </span>
+                                    </a><br/>
+                                    <a href="{{user.profileurl}}" target="_blank">Steam profile</a><br/>
+                                    <a ng-click="logout()">Logout</a>
+                                </div>  
+                            </div>
+                        </div>                      
+                    </div>
+                </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-xs-12 col-md-9 col-sm-9">
                 <div ng-view="" id="ng-view" class="viewanim"></div>
+                <div class="aes pull-right">Made with &hearts; by <a ng-href="#/player/21539">Aes</a></div>
             </div>
         </div>
     </div>
-
+    <div class="alert alert-danger alert-fixed" role="alert" ng-controller="errorCtrl" ng-show="toggle">
+        <span>{{error}}</span>
+        <button ng-show="toggle" class="pull-right" ng-click="empty()"><span>&times;</span></button>
+    </div>
     <script src="js/angular.min.js"></script>
     <script src="js/angular-animate.min.js"></script>
     <script src="js/angular-route.min.js"></script>
-    <script src="app/ngProgress.min.js"></script>    
+    <script src="js/angular-sanitize.min.js"></script>
+    <script src="js/ngProgress.min.js"></script>    
+    <script src="js/ui-comments-0.1.3-SNAPSHOT.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/markdown.js"></script>
+    <script src="js/Showdown.min.js"></script>
+    <script src="js/angular-moment.min.js"></script>
+    <script src="js/xeditable.min.js"></script>
+    <script src="js/match-media.js"></script>
     <script src="app/app.js"></script>
     <script src="app/filters.js"></script>
     <script src="app/services.js"></script>
-    <script src="app/player.js"></script>   
-    <script src="app/map.js"></script>             
+    <script src="app/player.js"></script>
+    <script src="app/map.js"></script>
     <script src="app/donate.js"></script>             
-    <script src="app/home.js"></script>       
-    <script src="app/server.js"></script>        
+    <script src="app/home.js"></script>
+    <script src="app/server.js"></script>
+    <script src="app/user.js"></script>          
+    <script src="app/menu.js"></script> 
+    <script src="app/comment.js"></script>
+    <script src="app/news.js"></script>  
 </body>
 </html>

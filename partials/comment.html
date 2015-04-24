@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="comment">
+		  <div class="comment-header">
+		    <span class="comment-user">
+		      <img class="comment-avatar" ng-if="comment.avatarUrl" ng-src="{{comment.avatarUrl}}" alt="{{comment.name}}" />
+		      <a class="comment-username" ng-href="#/player/{{comment.poster_id}}" title="{{comment.name}}">{{comment.name}}</a>
+		      <span class="comment-date" ng-if="comment.timestamp" am-time-ago="comment.timestamp | secondsToDateTime"></span>
+		  </div>
+		  <div class="comment-body">
+		    <div btf-markdown="comment.comment" editable-textarea="comment.comment" e-form="editcomment" e-rows="5" e-cols="60" onbeforesave="edit($data)" ng-hide="editcomment.$visible"></div>
+		    <div ng-if="comment.modified"><br/><span class="comment-date">Modified</span> <span class="comment-date" am-time-ago="comment.modified | secondsToDateTime"></span></div>
+		    <div class="editcont">
+		    	<div class="editbar">
+		    		<a ng-show="checkDepth()" ng-click="toggleRespond=!toggleRespond">Reply</a>
+		    		&nbsp;&nbsp;&nbsp;<a ng-click="editcomment.$show()" ng-hide="editcomment.$visible" ng-if="canModify">Edit</a>
+		    		&nbsp;&nbsp;&nbsp;<a ng-click="delete($parent.$parent.$index)" ng-if="canModify">Delete</a>
+		    	</div>
+		    	<div class="row" ng-if="canComment && toggleRespond">
+			    	<div class="col-md-6">
+		                <h2>Comment</h2>
+		                <form>
+		                    <textarea rows="5" class="commentarea" ng-model="form.newresponse" placeholder="Reply to that comment... (You can use Markdown)">
+		                    </textarea>
+		                </form>
+		            </div>
+		            <div class="col-md-6">
+		                <h2>Post Preview</h2>
+		                <div class="postpreview" btf-markdown="form.newresponse"></div>
+		            </div>
+		            <div class="col-md-12">
+		                <button ng-click="sendResponse()" class="sendbtn">Reply</button>
+		            </div>
+		        </div>
+		    </div>
+		    <div comments-transclude comment-data="comment.children"></div>
+		  </div>
+		</div>
+	</div>
+</div>

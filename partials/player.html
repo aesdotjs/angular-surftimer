@@ -162,33 +162,6 @@
             </div>
         </div>
     </div>
-    <!--<div class="col-md-12">
-        <div class="row view-header records">
-            <div class="col-md-5">
-                <h1>Recent Records</h1>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="stwidget">
-                    <div class="title wr">Recent Map Records</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stwidget">
-                    <div class="title stage">Recent Stage Records</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stwidget">
-                    <div class="title bonus">Recent Bonus Records</div>
-                </div>
-            </div>
-        </div>
-    </div>
--->
     <div class="col-md-12">
         <div class="row view-header details">
             <div class="col-md-5">
@@ -198,10 +171,36 @@
         <div class="col-md-12">
             <div class="mapwidget details">
                 Time on the server: {{player.timeontheserver | secondsToDateTime | date:"M" | sub1}}m {{player.timeontheserver | secondsToDateTime | date:"d'd' HH'h' mm'm'"}}<br/>
-                First seen: {{player.firstseen | secondsToDateTime | date:'yyyy-MM-dd HH:mm:ss'}}<br/>
+                <span ng-if="player.firstseen">First seen: {{player.firstseen | secondsToDateTime | date:'yyyy-MM-dd HH:mm:ss'}}<br/></span>
                 Connections: {{player.connections}}<br/>
                 Last connection: {{player.lastconnection | secondsToDateTime | date:'yyyy-MM-dd HH:mm:ss'}}
             </div>
         </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row view-header comments">
+            <div class="col-md-6">
+                <h1>Comments</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" ng-controller="commentsCtrl">
+        <div class="row commentcont"  ng-if="canComment">
+            <div class="col-md-6">
+                <h2>Comment</h2>
+                <form>
+                    <textarea rows="5" class="commentarea" ng-model="form.newcomment" placeholder="Comment that player... (You can use Markdown)">
+                    </textarea>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2>Post Preview</h2>
+                <div class="postpreview"  btf-markdown="form.newcomment"></div>
+            </div>
+            <div class="col-md-12">
+                <button ng-click="sendComment()" class="sendbtn">Send</button>
+            </div>
+        </div>
+        <comments comment-data="comments"></comments>
     </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" scroll>
     <div class="col-md-12">
         <div class="row view-header map">
             <div class="col-md-12">
@@ -12,7 +12,7 @@
         <button type="button" class="btn btn-primary btn-xs pull-right" ng-click="sort = 'player_id'">Player</button>
         <input ng-model="searchMap" class="inputdark pull-right" placeholder="Search Map..."/>
     </div>
-    <div ng-repeat="map in maps | orderBy:sort | filter:searchMap | limitTo:max" class="col-md-3 col-sm-6 widgetanim" scroll repeatprogress>
+    <div ng-repeat="map in maps | orderBy:sort | filter:searchMap | limitTo:max" class="col-md-3 col-sm-6 widgetanim" repeatprogress>
         <div class="mapwidget">
             <div class="title">
                 <a ng-href="#/map/{{map.id}}">{{map.name}}</a>

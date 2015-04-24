@@ -1,12 +1,88 @@
-app.controller('homeCtrl',['$scope','services', function ($scope, services) {
-	services.getRecentBroken(0).then(function(data){
-		$scope.brokenmap=data.data;
+app.controller('homeCtrl',['$scope','services','news','comment', function ($scope, services, news, comment) {
+	$scope.news=[];
+	$scope.comments=[];
+	$scope.widget={};
+	$scope.newspage=1;
+	$scope.commentpage=1;
+	$scope.widgetpage=0;
+	$scope.end=false;
+	$scope.endnews=false;
+	$scope.endcomment=false;
+	$scope.nulldate= new Date(0);
+	$scope.loadMore = function(type=0){
+		if(type===0 && !$scope.endcomment)
+		{
+			comment.getLatestComments($scope.commentpage).then(function(data){
+				if(data.data[0])
+				{
+				  if($scope.comments.length == 0)
+				  	$scope.comments=angular.copy(data.data);
+				  else
+				  	$scope.comments=$scope.comments.concat(data.data);
+				  $scope.commentpage++;
+				}
+				else
+				  $scope.endcomment=true;
+			});
+		}
+		else if(type===1 && !$scope.endnews)
+		{
+			news.getNewsPage($scope.newspage).then(function(data){		
+				if(data.data[0])
+				{
+				  if($scope.news.length == 0)
+				  	$scope.news=angular.copy(data.data);
+				  else
+				  	$scope.news=$scope.news.concat(data.data);
+				  $scope.newspage++;
+				}
+				else
+				  $scope.endnews=true;
+			});
+		}		
+	}
+	$scope.loadMore(1);
+	$scope.loadMore(0);
+	services.getWidget('players').then(function(data){
+		if(data.data)
+		{
+			$scope.widget.players=angular.copy(data.data);
+		}
 	});
-	services.getRecentBroken(1).then(function(data){
-		$scope.brokenbonus=data.data;
+	services.getWidget('wr').then(function(data){
+		if(data.data)
+		{
+			$scope.widget.wr=angular.copy(data.data);
+		}
 	});
-	services.getRecentBroken(2).then(function(data){
-		$scope.brokenstage=data.data;
-		console.log($scope);
+	services.getWidget('wrs').then(function(data){
+		if(data.data)
+		{
+			$scope.widget.wrs=angular.copy(data.data);
+		}
+	});
+	services.getWidget('wrb').then(function(data){
+		if(data.data)
+		{
+			$scope.widget.wrb=angular.copy(data.data);
+		}
+	});
+	services.getWidget('lastplayed').then(function(data){
+		if(data.data)
+		{
+			$scope.widget.lastplayed=angular.copy(data.data);
+		}
+	});
+	services.getWidget('mostplayed').then(function(data){
+		if(data.data)
+		{
+			$scope.widget.mostplayed=angular.copy(data.data);
+		}
+	});
+	services.getWidget('mostcontested').then(function(data){
+		if(data.data)
+		{
+			$scope.widget.mostcontested=angular.copy(data.data);
+		}
 	});
 }]);

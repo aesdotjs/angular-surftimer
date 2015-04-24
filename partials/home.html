@@ -1,35 +1,202 @@
- <div class="row">
-   <!-- <div class="col-md-12" ng-show="customers.length > 0">
-    
-    <nav class= "navbar navbar-default" role= "navigation" >
-    <div class= "navbar-header" >
-    <a class="btn btn-lg btn-success" href="#/edit-customer/0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new Customer</a>
+<div class="row home">
+    <div class="col-md-8">
+        <div class="stwidget">
+            <div class="title">Latest News</div>
+            <div class="newslistcont">
+                <div class="newslist" scrolllist="1">
+                    <div class="singlenews listanim" ng-repeat="post in news" ng-init="toggleBody=false">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="title">
+                                    <a ng-href="#/news/{{post.news_id}}">{{post.title}}</a>
+                                    <button type="button" class="pull-right expand" ng-click="toggleBody=!toggleBody" ng-class="{active : toggleBody}">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    <span class="comment-date pull-right" am-time-ago="post.timestamp | secondsToDateTime"></span>
+                                   
+                                </div>
+                                <div btf-markdown="post.body" class="col-md-12 newsbody" ng-show='toggleBody'>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
     </div>
-    </nav>
-        <table class="table table-striped table-bordered">
-        <thead>
-        <th>Customer Name&nbsp;</th>
-        <th>Email&nbsp;</th>
-        <th>Address&nbsp;</th>
-        <th>City&nbsp;</th>
-        <th>Country&nbsp;</th>
-        <th>Action&nbsp;</th>
-        </thead>
-        <tbody>
-            <tr ng-repeat="data in customers">
-                <td>{{data.customerName}}</td>
-                <td>{{data.email}}</td>
-                <td>{{data.address}}</td>
-                <td>{{data.city}}</td>
-                <td>{{data.country}}</td>
-                <td><a href="#/edit-customer/{{data.customerNumber}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Customer</a></td>
-            </tr>
-        </tbody>
-        </table>
-    </div>
-    <div class="col-md-12" ng-show="customers.length == 0">
-        <div class="col-md-12">
-            <h4>No customers found</h4>
+    <div class="col-md-4">
+        <div class="stwidget">
+            <div class="title">Top players</div>
+            <div class="values">
+                <span>Name</span>
+                <span>Points</span>
+                <span>Rank</span>
+            </div>
+            <div class="timelistcont">
+                <ul class="timelist">
+                    <li ng-repeat="time in widget.players">
+                        <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                        <span class="time">{{time.totalpoints}}</span>
+                        <span class="rank">{{ $index+1 }}</span>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>-->
+    </div>
+    <div class="col-md-4">
+        <div class="stwidget">
+            <div class="title">Top WR</div>
+            <div class="values">
+                <span>Name</span>
+                <span>WR</span>
+                <span>Rank</span>
+            </div>
+            <div class="timelistcont">
+                <ul class="timelist">
+                    <li ng-repeat="time in widget.wr">
+                        <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                        <span class="time">{{time.amount}}</span>
+                        <span class="rank">{{ $index+1 }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stwidget">
+            <div class="title">Top WRS</div>
+            <div class="values">
+                <span>Name</span>
+                <span>WRS</span>
+                <span>Rank</span>
+            </div>
+            <div class="timelistcont">
+                <ul class="timelist">
+                    <li ng-repeat="time in widget.wrs">
+                        <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                        <span class="time">{{time.amount}}</span>
+                        <span class="rank">{{ $index+1 }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stwidget">
+            <div class="title">Top WRB</div>
+            <div class="values">
+                <span>Name</span>
+                <span>WRB</span>
+                <span>Rank</span>
+            </div>
+            <div class="timelistcont">
+                <ul class="timelist">
+                    <li ng-repeat="time in widget.wrb">
+                        <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                        <span class="time">{{time.amount}}</span>
+                        <span class="rank">{{ $index+1 }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stwidget">
+            <div class="title">Last Played Map</div>
+            <div class="values">
+                <span>Name</span>
+                <span>Last connection</span>
+            </div>
+            <div class="timelistcont">
+                <ul class="timelist">
+                    <li ng-repeat="time in widget.lastplayed">
+                        <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                        <span class="time" am-time-ago="time.lastconnection | secondsToDateTime"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stwidget">
+            <div class="title">Most Played Map</div>
+            <div class="values">
+                <span>Name</span>
+                <span>Time Played</span>
+            </div>
+            <div class="timelistcont">
+                <ul class="timelist">
+                    <li ng-repeat="time in widget.mostplayed">
+                        <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                        <span class="time">{{time.timeontheserver| secondsToDateTime | amDifference : nulldate : 'Hours'}} Hours</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stwidget">
+            <div class="title">Most Contested Map</div>
+            <div class="values">
+                <span>Name</span>
+                <span>Contested</span>
+            </div>
+            <div class="timelistcont">
+                <ul class="timelist">
+                    <li ng-repeat="time in widget.mostcontested">
+                        <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                        <span class="time">{{time.contested}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="stwidget">
+            <div class="title">Latest Comments</div>
+            <div class="commentlistcont">
+                <div class="commentlist" scroll>
+                    <div class="singlecomment listanim" ng-repeat="comment in comments" ng-init="toggleBody=false">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="feed">
+                                    <div class="feedtext">
+                                        <a class="posteravatar" ng-href="#/player/{{comment.poster_id}}">
+                                            <img src="{{comment.avatarUrl}}" />
+                                        </a>
+                                        <a class="postername" ng-href="#/player/{{comment.poster_id}}">
+                                            {{comment.name}}
+                                        </a>
+                                        <span ng-if="comment.parent_id>0">
+                                            replied to
+                                            <a class="postername" ng-href="#/player/{{comment.pposter_id}}">
+                                            {{comment.pname}}
+                                            </a> on
+                                        </span>
+                                        <span ng-if="!comment.parent_id">
+                                            commented 
+                                        </span>
+                                        <span>
+                                            {{comment.type}}
+                                        </span>
+                                        <a class="item" ng-href="#/{{comment.type}}/{{comment.item_id}}">
+                                            {{comment.item_name}}
+                                        </a>
+                                    </div>
+                                    <div class="feeddate">
+                                        <button type="button" class="pull-right expand" ng-click="toggleBody=!toggleBody" ng-class="{active : toggleBody}">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                        <span class="comment-date pull-right" am-time-ago="comment.timestamp | secondsToDateTime"></span>
+                                    </div>
+                                </div>
+                                <div btf-markdown="comment.comment" class="col-md-12 commentbody" ng-show='toggleBody'>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
