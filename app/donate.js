@@ -3,6 +3,7 @@ app.controller('donateCtrl',['$scope','services', function ($scope, services) {
 	$scope.checktext="";
 	$scope.amount=0;
 	$scope.plan=0;
+	$scope.type=0;
 	$scope.checkSteamId = function()
 	{
 		services.checkSteamId($scope.steamid).then(function(data){
@@ -31,28 +32,23 @@ app.controller('donateCtrl',['$scope','services', function ($scope, services) {
 		}
 	}
 	$scope.setPlan = function(choice){
-		switch(choice){
-			case 1:
-				$scope.amount=10;
-				$scope.plan=1;
-				break;
-			case 2:
-				$scope.amount=20;
-				$scope.plan=2;
-				break;
-			case 3:
-				$scope.amount=30;
-				$scope.plan=3;
-				break;
-			case 4:
-				$scope.amount=50;
-				$scope.plan=4;
-				break;
-		}
+		$scope.plan=choice;
+		$scope.calcAmount();
 	}
 	$scope.planClass= function(plan){
 		if($scope.plan===plan)
 			return 'valid';
+	}
+	$scope.setType = function(choice){
+		$scope.type=choice;
+		$scope.calcAmount();
+	}
+	$scope.typeClass= function(type){
+		if($scope.type===type)
+			return 'valid';
+	}
+	$scope.calcAmount= function(){
+		$scope.amount=$scope.type*5*$scope.plan;
 	}
 	$scope.submit = function(){
 		if($scope.steamvalid === 2 && $scope.plan > 0 && $scope.name != "" && $scope.steamid != "")

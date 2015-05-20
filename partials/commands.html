@@ -17,7 +17,7 @@
             </tr>
             <tr ng-repeat="command in commands | filter:searchCommand">
                 <td>{{command.command}}</td>
-                <td>{{command.desc}}</td>
+                <td ng-bind-html="command.desc"></td>
             </tr>
         </table>
     </div> 

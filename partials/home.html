@@ -43,111 +43,119 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="stwidget">
-            <div class="title">Top WR</div>
-            <div class="values">
-                <span>Name</span>
-                <span>WR</span>
-                <span>Rank</span>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title">Top WR</div>
+                    <div class="values">
+                        <span>Name</span>
+                        <span>WR</span>
+                        <span>Rank</span>
+                    </div>
+                    <div class="timelistcont">
+                        <ul class="timelist">
+                            <li ng-repeat="time in widget.wr">
+                                <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                                <span class="time">{{time.amount}}</span>
+                                <span class="rank">{{ $index+1 }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="timelistcont">
-                <ul class="timelist">
-                    <li ng-repeat="time in widget.wr">
-                        <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
-                        <span class="time">{{time.amount}}</span>
-                        <span class="rank">{{ $index+1 }}</span>
-                    </li>
-                </ul>
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title">Top WRCP</div>
+                    <div class="values">
+                        <span>Name</span>
+                        <span>WRCP</span>
+                        <span>Rank</span>
+                    </div>
+                    <div class="timelistcont">
+                        <ul class="timelist">
+                            <li ng-repeat="time in widget.wrs">
+                                <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                                <span class="time">{{time.amount}}</span>
+                                <span class="rank">{{ $index+1 }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="stwidget">
-            <div class="title">Top WRS</div>
-            <div class="values">
-                <span>Name</span>
-                <span>WRS</span>
-                <span>Rank</span>
-            </div>
-            <div class="timelistcont">
-                <ul class="timelist">
-                    <li ng-repeat="time in widget.wrs">
-                        <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
-                        <span class="time">{{time.amount}}</span>
-                        <span class="rank">{{ $index+1 }}</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="stwidget">
-            <div class="title">Top WRB</div>
-            <div class="values">
-                <span>Name</span>
-                <span>WRB</span>
-                <span>Rank</span>
-            </div>
-            <div class="timelistcont">
-                <ul class="timelist">
-                    <li ng-repeat="time in widget.wrb">
-                        <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
-                        <span class="time">{{time.amount}}</span>
-                        <span class="rank">{{ $index+1 }}</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="stwidget">
-            <div class="title">Last Played Map</div>
-            <div class="values">
-                <span>Name</span>
-                <span>Last connection</span>
-            </div>
-            <div class="timelistcont">
-                <ul class="timelist">
-                    <li ng-repeat="time in widget.lastplayed">
-                        <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
-                        <span class="time" am-time-ago="time.lastconnection | secondsToDateTime"></span>
-                    </li>
-                </ul>
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title">Top WRB</div>
+                    <div class="values">
+                        <span>Name</span>
+                        <span>WRB</span>
+                        <span>Rank</span>
+                    </div>
+                    <div class="timelistcont">
+                        <ul class="timelist">
+                            <li ng-repeat="time in widget.wrb">
+                                <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                                <span class="time">{{time.amount}}</span>
+                                <span class="rank">{{ $index+1 }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="stwidget">
-            <div class="title">Most Played Map</div>
-            <div class="values">
-                <span>Name</span>
-                <span>Time Played</span>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title">Last Played Map</div>
+                    <div class="values">
+                        <span>Name</span>
+                        <span>Last connection</span>
+                    </div>
+                    <div class="timelistcont">
+                        <ul class="timelist">
+                            <li ng-repeat="time in widget.lastplayed">
+                                <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                                <span class="time" am-time-ago="time.lastconnection | secondsToDateTime"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="timelistcont">
-                <ul class="timelist">
-                    <li ng-repeat="time in widget.mostplayed">
-                        <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
-                        <span class="time">{{time.timeontheserver| secondsToDateTime | amDifference : nulldate : 'Hours'}} Hours</span>
-                    </li>
-                </ul>
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title">Most Played Map</div>
+                    <div class="values">
+                        <span>Name</span>
+                        <span>Time Played</span>
+                    </div>
+                    <div class="timelistcont">
+                        <ul class="timelist">
+                            <li ng-repeat="time in widget.mostplayed">
+                                <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                                <span class="time">{{time.timeontheserver| secondsToDateTime | amDifference : nulldate : 'Hours'}} Hours</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="stwidget">
-            <div class="title">Most Contested Map</div>
-            <div class="values">
-                <span>Name</span>
-                <span>Contested</span>
-            </div>
-            <div class="timelistcont">
-                <ul class="timelist">
-                    <li ng-repeat="time in widget.mostcontested">
-                        <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
-                        <span class="time">{{time.contested}}</span>
-                    </li>
-                </ul>
+            <div class="col-md-4">
+                <div class="stwidget">
+                    <div class="title">Most Contested Map</div>
+                    <div class="values">
+                        <span>Name</span>
+                        <span>Contested</span>
+                    </div>
+                    <div class="timelistcont">
+                        <ul class="timelist">
+                            <li ng-repeat="time in widget.mostcontested">
+                                <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                                <span class="time">{{time.contested}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

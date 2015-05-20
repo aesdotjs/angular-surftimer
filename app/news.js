@@ -21,19 +21,19 @@ app.controller('newsPageCtrl',['$scope','news','user', function ($scope, news, u
      $scope.isAdmin = false;
   });
   $scope.loadMore = function(){
-	news.getNewsPage($scope.page).then(function(data){
-		
-		if(data.data[0])
-		{
-		  if($scope.news.length == 0)
-		  	$scope.news=angular.copy(data.data);
-		  else
-		  	$scope.news=$scope.news.concat(data.data);
-		  $scope.page++;
-		}
-		else
-		  $scope.end=true;
-	});
+  	news.getNewsPage($scope.page).then(function(data){
+  		
+  		if(data.data[0])
+  		{
+  		  if($scope.news.length == 0)
+  		  	$scope.news=angular.copy(data.data);
+  		  else
+  		  	$scope.news=$scope.news.concat(data.data);
+  		  $scope.page++;
+  		}
+  		else
+  		  $scope.end=true;
+  	});
   }
 
   $scope.sendNews = function(){

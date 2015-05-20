@@ -1,19 +1,31 @@
 app.controller('serverCtrl',['$scope','services', function ($scope, services) {
-	services.getServerInfo().then(function(data){
-  	    $scope.info=data.data.info;
-  	    $scope.players=data.data.players;
-  	    $scope.rules=data.data.rules;
-  	    services.searchMap($scope.info.Map).then(function(data){
-	    	$scope.mapid=data.data.id;
+	$scope.servers=[];
+	$scope.servers[0]={serverinfo:{}};
+	$scope.servers[1]={serverinfo:{}};
+	$scope.servers[0].serverinfo.address="82.211.15.67";
+	$scope.servers[0].serverinfo.port="27240";
+	$scope.servers[1].serverinfo.address="82.211.15.67";
+	$scope.servers[1].serverinfo.port="27340";
+	fetchServer = function(i)
+	{
+		services.getServerInfo($scope.servers[i].serverinfo.address,$scope.servers[i].serverinfo.port).then(function(data){
+	  	    $scope.servers[i].info=angular.copy(data.data.info);
+	  	    $scope.servers[i].players=angular.copy(data.data.players);
+	  	    $scope.servers[i].rules=angular.copy(data.data.rules);
+	  	    services.searchMap($scope.servers[i].info.Map).then(function(data){
+		    	$scope.servers[i].mapid=data.data.id;
+		    });
+		    services.searchMap($scope.servers[i].rules.sm_nextmap).then(function(data){
+		    	$scope.servers[i].nextmapid=data.data.id;
+		    });
+		    angular.forEach($scope.servers[i].players,function(player,key){
+		    	services.searchPlayers(player.Name).then(function(data){
+		    		if(data.data[0])
+		    			player.id=data.data[0].id;
+		    	});
+		    });
 	    });
-	    services.searchMap($scope.rules.sm_nextmap).then(function(data){
-	    	$scope.nextmapid=data.data.id;
-	    });
-	    angular.forEach($scope.players,function(player,key){
-	    	services.searchPlayers(player.Name).then(function(data){
-	    		if(data.data[0])
-	    			player.id=data.data[0].id;
-	    	});
-	    });
-    });
+	}
+	fetchServer(0);
+	fetchServer(1);
 }]);

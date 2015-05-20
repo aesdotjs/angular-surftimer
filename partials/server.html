@@ -1,10 +1,10 @@
-<div class="row">
+<div class="row" ng-repeat="server in servers">
 	<div class="col-md-12">
 		<div class="row view-header server">
 	        <div class="col-md-12">
-                <a href="steam://connect/82.211.15.67:27240
+                <a href="steam://connect/{{server.serverinfo.address}}:{{server.serverinfo.port}}
 ">
-	               <h1>{{info.HostName}}<br/>82.211.15.67:27240</h1>
+	               <h1>{{server.info.HostName}}<br/>{{server.serverinfo.address}}:{{server.serverinfo.port}}</h1>
                </a>
 	        </div>
 	    </div>
@@ -16,7 +16,7 @@
                     <div class="title wr">Online Players</div>
                     <div>
                         <ul class="timelist">
-                            <li ng-repeat="player in players | orderBy:name" class="listanim">
+                            <li ng-repeat="player in server.players | orderBy:name | filter:'!Map WR' | filter:'!Stage WR' | filter:'!Bonus WR'" class="listanim">
                                 <a ng-href="#/player/{{player.id}}">{{player.Name}}</a>
                                 <span class="time">{{player.TimeF}}</span> 
                             </li>
@@ -26,9 +26,9 @@
             </div>
             <div class="col-md-4 serverinfo">
             	<div class="stwidget">
-		            <span class="curmap">Map : <a ng-href="#/map/{{mapid}}">{{info.Map}}</a></span><br/>
-		            <span class="nextmap">Next Map : <a ng-href="#/map/{{nextmapid}}">{{rules.sm_nextmap}}</a></span><br/>
-		            <span class="playeronline">Online : {{players.length}}/24</span>
+		            <span class="curmap">Map : <a ng-href="#/map/{{server.mapid}}">{{server.info.Map}}</a></span><br/>
+		            <span class="nextmap">Next Map : <a ng-href="#/map/{{server.nextmapid}}">{{server.rules.sm_nextmap}}</a></span><br/>
+		            <span class="playeronline">Online : {{server.players.length - 3}}/21</span>
 		        </div>
 	        </div>
         </div>

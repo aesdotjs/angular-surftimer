@@ -27,25 +27,62 @@
                 </div>
 
                 <div class="formRow" ng-show="isValid() === 'invalid'">{{checktext}} </div>
-
                 <div class="row">
-                	<div class="col-md-3">
-                		<div class="plan" ng-click="setPlan(1)" ng-class="planClass(1)">3<br/>Months</div>
-                	</div>
-                	<div class="col-md-3">
-                		<div class="plan" ng-click="setPlan(2)" ng-class="planClass(2)">6<br/>Months</div>
-                	</div>
-                	<div class="col-md-3">
-                		<div class="plan" ng-click="setPlan(3)" ng-class="planClass(3)">10<br/>Months</div>
-                	</div>
-                	<div class="col-md-3">
-                		<div class="plan" ng-click="setPlan(4)" ng-class="planClass(4)">Life<br/>Time</div>
-                	</div>
+                    <div class="col-xs-12">
+                        <div class="type silver" ng-click="setType(1)" ng-class="typeClass(1)">    
+                            <h2>Donator</h2>
+                            <ul>
+                                <li>[VIP] [<PlayerName>] : Message</li>
+                                <li>Access to Weapon Menu</li>
+                                <li>Access to Modelchanger</li>
+                                <li>View your model from a third person point of view.</li>
+                                <li>Silver D icon on top of your model</li>
+                                <li>Be able to start extend vote.</li>
+                            </ul>
+                            <span>5€ / Month</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="type gold" ng-click="setType(2)" ng-class="typeClass(2)">    
+                            <h2>Advanced <br/>Donator</h2>
+                            <ul>
+                                <li>Standard donator features</li>
+                                <li>Be able to report records.</li>
+                                <li>Be able to paint/draw ingame.</li>
+                                <li>Reserved Slot (Join the server when the server is full)</li>
+                                <li>You can completly change your chatrank.</li>
+                                <li>Access to Veteran Server</li>
+                                <li>Access to modify your timescale/gravity (Timer Disabled)</li>
+                                <li>Change your ingame playername</li>
+                                <li>Be able to start setnextmap/changelevel votes.</li>
+                                <li>Access to trails menu</li>
+                                <li>Access to mute/gag other people</li>
+                                <li>Gold D icon on top of your model</li>
+                            </ul>
+                            <span>10€ / Month</span>
+                        </div>
+                    </div>
                 </div>
-                
-                
-                
-                
+                <div class="row">
+                	<div class="col-xs-4">
+                		<div class="plan" ng-click="setPlan(1)" ng-class="planClass(1)">1<br/>Months</div>
+                	</div>
+                	<div class="col-xs-4">
+                		<div class="plan" ng-click="setPlan(2)" ng-class="planClass(2)">2<br/>Months</div>
+                	</div>
+                	<div class="col-xs-4">
+                		<div class="plan" ng-click="setPlan(3)" ng-class="planClass(3)">3<br/>Months</div>
+                	</div>
+                    <div class="col-xs-4">
+                        <div class="plan" ng-click="setPlan(4)" ng-class="planClass(4)">4<br/>Months</div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="plan" ng-click="setPlan(5)" ng-class="planClass(5)">5<br/>Months</div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="plan" ng-click="setPlan(6)" ng-class="planClass(6)">6<br/>Months</div>
+                    </div>
+                </div>     
                 <div class="row"><div id="costinfo" class="col-md-2 col-md-offset-5">&euro;{{amount}}.00</div></div>
                 <div class="formRow">
                     <input type="submit" id="submit" value="Donate">

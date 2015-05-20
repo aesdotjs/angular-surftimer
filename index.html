@@ -12,7 +12,7 @@
     <title>Nightmare surf statistics</title>
 </head>
 <body ng-controller="mainCtrl">
-    <div class="navbar navbar-default navbar-fixed-top panel" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top panel" role="navigation" ng-cloak>
         <div class="container-fluid">
             <div class="row">
                 <button type="button" class="navbar-toggle" ng-click="toggleMenu=!toggleMenu">
@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="container-fluid" id="page">
-        <div class="row row-offcanvas row-offcanvas-left" ng-class="toggleMenu?'active':''">
+        <div class="row row-offcanvas row-offcanvas-left" ng-class="toggleMenu?'active':''" ng-cloak>
             <div class="col-sm-3 col-md-3 col-xs-6 sidebar-offcanvas nopadding menu-cont" role="navigation">
                 <nav ng-controller="menuCtrl">
                     <ul class="menu-left">
@@ -68,6 +68,7 @@
                                 </li>
                             </ul>
                         </li>
+                        <li ng-class="menuClass('pr')"><a ng-href="#/pr">Personal Records</a></li>
                         <li ng-class="menuClass('server')"><a ng-href="#/server">Server</a></li>
                         <li ng-class="menuClass('rules')"><a ng-href="#/rules">Rules</a></li>
                         <li ng-class="menuClass('commands')"><a ng-href="#/commands">Commands</a></li>
@@ -92,6 +93,83 @@
                                 </div>  
                             </div>
                         </div>                      
+                    </div>
+                </div>
+                <div class="col-md-12" ng-controller="onlinePlayersCtrl" ng-cloak>
+                    <div ng-if="players.length > 0">
+                        <h2 class="activitytitle">Online Players</h2>
+                        <div class="activitycont">
+                            <div class="playerscont">
+                                <span ng-repeat="player in players">
+                                    <a ng-href="#/player/{{player.player_id}}">{{player.name}}</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-controller="activityCtrl">
+                    <h2 class="activitytitle">Live Activity</h2>
+                    <div class="activitycont" scrolllist>
+                        <ul class="activity">
+                            <li ng-repeat="activity in activities" class="widgetanim">
+                                <div ng-if="activity.stageid>0" class="stage">
+                                    <a ng-href="#/player/{{activity.playerid}}">{{activity.playername}}</a>
+                                    has beaten {{activity.stagename}} WRCP on 
+                                    <a ng-href="#/map/{{activity.mapid}}/{{activity.playerid}}">{{activity.mapname}}</a>
+                                    <span class="comment-date" am-time-ago="activity.date | secondsToDateTime"></span>
+                                </div>
+                                <div ng-if="activity.runID>0" class="bonus">
+                                    <a ng-href="#/player/{{activity.playerid}}">{{activity.playername}}</a>
+                                    has beaten Bonus {{activity.runID}} WRB on 
+                                    <a ng-href="#/map/{{activity.mapid}}/{{activity.playerid}}">{{activity.mapname}}</a>
+                                    <span class="comment-date" am-time-ago="activity.date | secondsToDateTime"></span>
+                                </div>
+                                <div ng-if="activity.runID===0 && activity.stageid===null" class="map">
+                                    <a ng-href="#/player/{{activity.playerid}}">{{activity.playername}}</a>
+                                    <span ng-if="activity.isFirstFinish&&activity.isWR==0&&activity.isTop10==0">
+                                        has finished
+                                    </span>
+                                    <span ng-if="activity.isWR">
+                                        has beaten the map record on
+                                    </span>
+                                    <span ng-if="activity.isTop10">
+                                        has finished in Top 10 on
+                                    </span>
+                                    <a ng-href="#/map/{{activity.mapid}}/{{activity.playerid}}">{{activity.mapname}}</a>
+                                    <span ng-if="activity.isFirstFinish&&activity.isWR==0&&activity.isTop10==0">
+                                        for the first time.
+                                    </span>
+                                    <span class="comment-date" am-time-ago="activity.date | secondsToDateTime"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>             
+                <div class="col-md-12" ng-controller="recentlyBrokenCtrl">
+                    <h2 class="activitytitle">Recent Broken Records</h2>
+                    <div class="activitycont" scrolllist>
+                        <ul class="activity">
+                            <li ng-repeat="record in brokenRecords" class="widgetanim">
+                                <div ng-if="record.stageid>0" class="stage">
+                                    <a ng-href="#/player/{{record.playerid}}">{{record.playername}}</a>
+                                    has lost {{record.stagename}} WRCP on 
+                                    <a ng-href="#/map/{{record.mapid}}/{{record.playerid}}">{{record.mapname}}</a>
+                                    <span class="comment-date" am-time-ago="record.date | secondsToDateTime"></span>
+                                </div>
+                                <div ng-if="record.runID>0" class="bonus">
+                                    <a ng-href="#/player/{{record.playerid}}">{{record.playername}}</a>
+                                    has lost Bonus {{record.runID}} WRB on 
+                                    <a ng-href="#/map/{{record.mapid}}/{{record.playerid}}">{{record.mapname}}</a>
+                                    <span class="comment-date" am-time-ago="record.date | secondsToDateTime"></span>
+                                </div>
+                                <div ng-if="record.runID===0 && record.stageid===null" class="map">
+                                    <a ng-href="#/player/{{record.playerid}}">{{record.playername}}</a>
+                                    has beaten the map record on
+                                    <a ng-href="#/map/{{record.mapid}}/{{record.playerid}}">{{record.mapname}}</a>
+                                    <span class="comment-date" am-time-ago="record.date | secondsToDateTime"></span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -122,12 +200,13 @@
     <script src="app/services.js"></script>
     <script src="app/player.js"></script>
     <script src="app/map.js"></script>
-    <script src="app/donate.js"></script>             
+    <script src="app/donate.js"></script>
     <script src="app/home.js"></script>
     <script src="app/server.js"></script>
-    <script src="app/user.js"></script>          
-    <script src="app/menu.js"></script> 
+    <script src="app/user.js"></script>
+    <script src="app/menu.js"></script>
     <script src="app/comment.js"></script>
-    <script src="app/news.js"></script>  
+    <script src="app/news.js"></script>
+    <script src="app/prinfo.js"></script>  
 </body>
 </html>

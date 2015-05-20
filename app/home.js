@@ -9,7 +9,8 @@ app.controller('homeCtrl',['$scope','services','news','comment', function ($scop
 	$scope.endnews=false;
 	$scope.endcomment=false;
 	$scope.nulldate= new Date(0);
-	$scope.loadMore = function(type=0){
+	$scope.loadMore = function(type){
+		type = typeof type !== 'undefined' ? type : 0;
 		if(type===0 && !$scope.endcomment)
 		{
 			comment.getLatestComments($scope.commentpage).then(function(data){

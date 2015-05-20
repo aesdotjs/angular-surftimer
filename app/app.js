@@ -16,9 +16,10 @@ app.controller('rulesCtrl',['$scope','services', function ($scope, services) {
 
 }]);
 
-app.controller('commandsCtrl',['$scope','services', function ($scope, services) {
+app.controller('commandsCtrl',['$scope','services','$routeParams', function ($scope, services,$routeParams) {
   services.getCommands().then(function(data){
       $scope.commands = data.data.commands;
+      $scope.searchCommand=$routeParams.search || '';
   });
 }]);
 
@@ -92,6 +93,11 @@ app.config(['$routeProvider',
         templateUrl: 'partials/commands.html',
         controller: 'commandsCtrl'
       })
+      .when('/commands/:search', {
+        title: 'Nightmare surf statitics - Commands ',
+        templateUrl: 'partials/commands.html',
+        controller: 'commandsCtrl'
+      })
       .when('/donate/', {
         title: 'Nightmare surf statitics - Donate ',
         templateUrl: 'partials/donate.html',
@@ -103,14 +109,24 @@ app.config(['$routeProvider',
         controller: 'serverCtrl'
       })
       .when('/news/', {
-        title: 'Nightmare surf statitics - Server ',
+        title: 'Nightmare surf statitics - News ',
         templateUrl: 'partials/newspage.html',
         controller: 'newsPageCtrl'
       })
       .when('/news/:id', {
-        title: 'Nightmare surf statitics - Server ',
+        title: 'Nightmare surf statitics - News ',
         templateUrl: 'partials/news.html',
         controller: 'newsCtrl'
+      })
+      .when('/pr/:mapid/:playerid', {
+        title: 'Nightmare surf statitics - Personal Records',
+        templateUrl: 'partials/prinfo.html',
+        controller: 'prinfoCtrl'
+      })
+      .when('/pr/', {
+        title: 'Nightmare surf statitics - Personal Records',
+        templateUrl: 'partials/prinfo.html',
+        controller: 'prinfoCtrl'
       })
       .otherwise({
         redirectTo: '/'

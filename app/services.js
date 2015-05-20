@@ -70,8 +70,8 @@ app.factory("services", ['$http', function($http) {
   obj.getMapRecords = function(mapID,runID){
     return $http.get(serviceBase + 'maprecords?mapid=' + mapID+'&runid='+runID);
   }
-  obj.getPlayerListRank = function(ccode){
-    return $http.get(serviceBase + 'playerlistrank?ccode=' + ccode);
+  obj.getPlayerListRank = function(ccode,sort,page){
+    return $http.get(serviceBase + 'playerlistrank?ccode=' + ccode +'&sort='+sort+'&page='+page);
   }
   obj.getCommands = function(){
     return $http.get('app/commands.json');
@@ -88,8 +88,11 @@ app.factory("services", ['$http', function($http) {
   obj.searchMap = function(searchtext){
     return $http.get(serviceBase + 'searchmap?search='+searchtext);
   }
-  obj.getServerInfo = function(){
-    return $http.get(serviceBase + 'serverinfo');
+  obj.searchMaps = function(searchtext){
+    return $http.get(serviceBase + 'searchmaps?search='+searchtext);
+  }
+  obj.getServerInfo = function(address,port){
+    return $http.get(serviceBase + 'serverinfo?server='+address+'&port='+port);
   }
   obj.isLoged = function(){
     return $http.get(serviceBase + 'isloged');
@@ -100,21 +103,57 @@ app.factory("services", ['$http', function($http) {
   obj.getWidget = function(type){
     return $http.get(serviceBase + 'widget?type='+type);
   }
+  obj.getActivity = function(page,lastid,bar){
+    return $http.get(serviceBase + 'activity?page='+page+'&lastid='+lastid+(bar?'&noprogress':''));
+  }
+   obj.getRecentlyBroken = function(page,lastid,bar){
+    return $http.get(serviceBase + 'recentlybroken?page='+page+'&lastid='+lastid+(bar?'&noprogress':''));
+  }
+  obj.getPlayerSet = function(id,page){
+    return $http.get(serviceBase + 'playerset?id='+id+'&page='+page);
+  }
+  obj.getPlayerBroken = function(id,page){
+    return $http.get(serviceBase + 'playerbroken?id='+id+'&page='+page);
+  }
+  obj.getPrinfo = function(playerid,mapid){
+    return $http.get(serviceBase + 'prinfo?playerid='+playerid+'&mapid='+mapid);
+  }
+  obj.getOnlinePlayers = function(){
+    return $http.get(serviceBase + 'onlineplayers');
+  }
+  obj.addReport = function(body,reportedpid,mapid,runid,stageid,duration){
+    return $http.post(serviceBase+'addreport',{
+      'report' : body,
+      'reported_player_id' : reportedpid,
+      'map_id' : mapid,
+      'runid' : runid,
+      'stage_id' : stageid,
+      'duration' : duration
+    });
+  }
   return obj;   
 }]);
 
-app.factory("user", ['$http','$rootScope', function($http,$rootScope) {
+app.factory("user", ['$http','$rootScope','ngProgress', function($http,$rootScope,ngProgress) {
   var serviceBase = 'services/';
   var obj = {};
+  obj.working=false;
   obj.logged=false;
   obj.user={};
   obj.isLoged = function(){
-    $http.get(serviceBase + 'isloged').then(function(data){
+    if(!obj.working)
+    {
+      ngProgress.start();
+      working=true;
+    }
+    $http.get(serviceBase + 'isloged?noprogress').then(function(data){
       if(data.data.steamid)
       {
         obj.user=data.data;
         obj.logged=true;
         $rootScope.$broadcast('user:updated',obj.user.playerid);
+        ngProgress.complete();
+        obj.working=false;
         return true;
       }
       return false;
@@ -129,6 +168,9 @@ app.factory("user", ['$http','$rootScope', function($http,$rootScope) {
   }
   obj.isAdmin = function(){
     return $http.get(serviceBase + 'admincheck');
+  }
+  obj.canReport = function(){
+    return $http.get(serviceBase + 'canreport');
   }
   return obj;   
 }]);
@@ -288,6 +330,9 @@ app.factory('interceptorNgProgress', function ($injector) {
       var ngProgress;
       ngProgress = getNgProgress();
       if (request.url.indexOf('.html') > 0) {
+        return request;
+      }
+      if (request.url.indexOf('noprogress') > 0) {
         return request;
       }
       if (!working) {

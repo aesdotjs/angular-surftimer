@@ -35,6 +35,8 @@ a,a:focus {
 #page{ margin-top:67px;}
 #ng-view{color:#eee;}
 #ng-view>.row{padding-bottom:15px;}
+
+
 .menu-cont{
 	min-height: 100%;
 	height: auto !important; /*min-height hack*/
@@ -211,6 +213,62 @@ ul.timelist > li > .rank{
 	padding-right: 10px;
 	color:#AD201B;
 }
+ul.timelist .timediff{
+	color:#999;
+	font-size:11px;
+}
+
+.activitytitle{
+	color:#eee;
+	font-family:"Audiowide";
+	text-align: center;
+}
+.activitycont{
+	color:#eee;
+	font-family:"Quicksand";
+	margin-left:-15px;
+	margin-right:-15px;
+	max-height:350px;
+	border-top:1px solid #4d4e50;
+	overflow-y:auto;
+	overflow-x:hidden;
+	border-bottom:1px solid #4d4e50;
+}
+.playerscont{
+	padding:15px;
+	background-color: #1F1F1F;
+}
+.playerscont span{
+	margin-right:10px;
+}
+.stwidget>.activitycont{
+	margin:0;
+	background-color: #393838;
+}
+.activity li{
+	border:1px solid #4d4e50;
+	margin-top:10px;
+	background-color: #1F1F1F;
+}
+.activity li>div{
+	padding-left:5px;
+	padding-right:15px;
+	border-left-style: solid;
+	border-left-width: 10px;
+}
+.activity li>div.map{
+	border-left-color:#170F30;
+}
+.activity li>div.stage{
+	border-left-color:#12709F;
+}
+.activity li>div.bonus{
+	border-left-color:#AD201B;
+}
+.prinfo{
+	padding:15px;
+	font-family: "Quicksand";
+}
 .stwidget{
 	min-height:250px;
 	border-radius:5px;
@@ -385,7 +443,7 @@ button.expand>span{
     overflow:hidden;
 }
 .mapwidget .title{
-	font-family:"Audiowide";
+	font-family:"Quicksand";
 	font-size:15px;
 	height: 30px;
 	line-height: 30px;
@@ -412,6 +470,25 @@ button.expand>span{
 }
 .mapwidget .info >span{
 	float:right;
+}
+.prinfosearch{
+	margin-bottom:25px;
+}
+.mapwidget.option{
+	transition:all 400ms ease;
+	margin:5px 15px;
+	cursor:pointer;
+}
+.mapwidget.option .title{
+	border-bottom:0;
+}
+.mapwidget.option:hover, .mapwidget.option.valid{
+	background-color:#492;
+	-moz-transform: scale(1.2);
+	-webkit-transform: scale(1.2);
+	-o-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	transform: scale(1.2);
 }
 .sort-bar{
 	height: 40px;
@@ -684,6 +761,7 @@ table.command-table tr td {
 		transform: scale(1);
   	}
 }
+.widgetanim.ng-leave,
 .commentanim.ng-leave {
   -webkit-animation: leave_widget 500ms ease; 
   animation: leave_widget 500ms ease; 
@@ -857,8 +935,8 @@ table.command-table tr td {
   -webkit-animation-delay: 50ms;
 }
 /*.widgetanim.ng-leave-stagger,
-.listanim.ng-leave-stagger{*/
-.commentanim.ng-leave-stagger
+.listanim.ng-leave-stagger,*/
+.commentanim.ng-leave-stagger{
   transition-delay: 100ms;
   animation-delay: 100ms;
 }
@@ -1049,6 +1127,69 @@ textarea.editable-input{
 	-o-transform: scale(1.2);
 	-ms-transform: scale(1.2);
 	transform: scale(1.2);
+}
+.type{
+	margin-top:15px;
+	padding-top:10px;
+	cursor: pointer;
+	transition:all 400ms ease;
+}
+.type.silver{
+	background-color:#A8A8A8;
+}
+.type.gold{
+	background-color:#C98910;
+}
+.type h2{
+	text-align:center;
+	text-transform: uppercase;
+	font-family: 'audiowide';
+}
+.type ul{
+	opacity:0;
+	max-height:0px;
+	overflow:hidden;
+	padding:0px;
+	transition:all 600ms ease;
+}
+.type ul>li{
+	font-family:"Quicksand";
+	margin-left:15px;
+}
+.type span {
+	text-align: center;
+	text-transform: uppercase;
+	font-family: 'audiowide';
+	font-size:20px;
+	color:#12709F;
+	opacity:0;
+	-moz-transform: scale(2);
+	-webkit-transform: scale(2);
+	-o-transform: scale(2);
+	-ms-transform: scale(2);
+	transform: scale(2);
+	transition:all 600ms ease;
+	display: block;
+	margin: 0 auto;
+	max-width: 50%;
+	max-height:0;
+}
+.type:hover span{
+	opacity:1;
+	max-height:100%;
+	-moz-transform: scale(1);
+	-webkit-transform: scale(1);
+	-o-transform: scale(1);
+	-ms-transform: scale(1);
+	transform: scale(1);
+}
+.type:hover ul{
+	opacity:1;
+	max-height:1000px;
+	padding:15px;
+}
+.type.valid{
+	background-color:#492;
 }
 .alert-fixed{
 	position: fixed;

@@ -11,11 +11,11 @@
         <button type="button" class="btn btn-primary btn-xs pull-right" ng-click="sort='rank'">Rank</button>
         <input ng-model="searchPlayer" class="inputdark pull-right" placeholder="Search Players..."/>
     </div>
-    <div ng-repeat="player in players  | filter:searchPlayer | orderBy:sort | limitTo:max" class="col-md-4 col-sm-6 widgetanim" repeatprogress>
+    <div ng-repeat="player in players" class="col-md-4 col-sm-6 widgetanim" repeatprogress>
         <div class="mapwidget">
             <div class="title">
                 <a ng-href="#/player/{{player.id}}">{{player.name | limitTo:25:0}}</a>
-                <span>#{{player.rank}}</span>
+                <span ng-if="player.rank">#{{player.rank}}</span>
             </div>
             <div class="info">
                 <div class="playerpoints">{{player.totalpoints}} Points</div>

@@ -25,7 +25,10 @@
                 <ul class="timelist">
                     <li ng-repeat="time in map.times | filter:searchMap | limitTo:mapmax" class="listanim">
                         <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
-                        <span class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</span>
+                        <a ng-href="#/pr/{{mapid}}/{{time.id}}" class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</a>
+                        <span>
+                            <span class="timediff" ng-if="time.timediff>0"> +{{time.timediff+0.001 | secondsToDateTime | date:'mm:ss.sss'}}</span>
+                        </span>
                         <span class="rank">{{ time.rank }}</span>
                     </li>
                 </ul>
@@ -40,7 +43,10 @@
                 <ul class="timelist">
                     <li ng-repeat="time in stage.times | filter:searchStage | limitTo:stagemax[$index]" class="listanim">
                         <a ng-href="#/player/{{time.id}}">{{time.name| limitTo:20:0}}</a>
-                        <span class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</span>
+                        <a ng-href="#/pr/{{mapid}}/{{time.id}}" class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</a>
+                        <span>
+                            <span class="timediff" ng-if="time.timediff>0">+{{time.timediff+0.001 | secondsToDateTime | date:'mm:ss.sss'}}</span>
+                        </span>
                         <span class="rank">{{ time.rank }}</span>
                     </li>
                 </ul>
@@ -55,7 +61,10 @@
                 <ul class="timelist">
                     <li ng-repeat="time in bonus.times | filter:searchBonus | limitTo:bonusmax[$index]" class="listanim">
                         <a ng-href="#/player/{{time.playerid}}">{{time.name | limitTo:20:0}}</a>
-                        <span class="time">{{time.time | secondsToDateTime | date:'mm:ss.sss'}}</span>
+                        <a ng-href="#/pr/{{mapid}}/{{time.playerid}}" class="time">{{time.time | secondsToDateTime | date:'mm:ss.sss'}}</a>
+                        <span>
+                            <span class="timediff" ng-if="time.timediff>0">+{{time.timediff+0.001 | secondsToDateTime | date:'mm:ss.sss'}}</span>
+                        </span>
                         <span class="rank">{{ time.rank }}</span>
                     </li>
                 </ul>

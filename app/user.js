@@ -19,7 +19,7 @@ app.controller('userCtrl',['$scope','$interval','services','user', function ($sc
   $scope.login = function(){
     if(angular.isDefined(login)) return;
     login = $interval(function(){
-      if(cnt>9)
+      if(cnt>20)
         stop();        
       user.isLoged();
       cnt++;

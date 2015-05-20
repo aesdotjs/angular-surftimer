@@ -1,0 +1,78 @@
+<div class="row">
+	<div class="col-md-12">
+        <div class="row view-header map">
+        	<div class="col-md-12">
+        		<h1>Search Personal Record</h1>
+        	</div>
+        </div>
+    </div>
+    <div class="row prinfosearch">
+	    <div class="col-md-6">
+	    	<input ng-model="searchMap" class="inputdark aligncenter" placeholder="Search a Map..."/>
+	    	<div class="row">
+	    		<div ng-repeat="map in maps" class="col-xs-6 widgetanim">
+	        		<div class="mapwidget option" ng-class="mapClass(map.id)" ng-click="setMap(map.id)">
+	        			<div class="title">{{map.name}}</div>
+	        		</div>
+	        	</div>
+	    	</div>
+	    </div>
+	    <div class="col-md-6">
+	    	<input ng-model="searchPlayer" class="inputdark aligncenter" placeholder="Search a Player..."/>
+	    	<div class="row">
+	    		<div ng-repeat="player in players" class="col-xs-6 widgetanim">
+	        		<div class="mapwidget option" ng-class="playerClass(player.id)" ng-click="setPlayer(player.id)">
+	        			<div class="title">{{player.name}}</div>
+	        		</div>
+	        	</div>
+	    	</div>
+	    </div>
+	</div>
+	<div class="col-md-12" ng-if="prinfo">
+        <div class="row view-header map">
+        	<div class="col-md-12">
+        		<h1>Personal Records of {{player.info.name}} on {{map.info.name}}</h1>
+        	</div>
+        </div>
+    </div>
+    <div class="col-md-12" ng-if="prinfo">
+    	<div ng-repeat="pr in prinfo" class="col-md-4  col-sm-6 widgetanim">
+    		<div class="stwidget">   
+            	<div ng-if="pr.runID===0" class="title wr">Map</div>
+            	<div ng-if="pr.stageid>0" class="title stage">{{pr.name}}</div>
+            	<div ng-if="pr.runID>0" class="title bonus">{{pr.name}}</div>
+            	<div class="prinfo">
+            		<div ng-if="pr.timeinfo.duration>0">
+	            		Time : {{pr.timeinfo.duration | secondsToDateTime | date:'mm:ss.sss'}} <br/>
+	            		Rank : {{pr.rank}}/{{pr.rankamount}}<br/>
+	            		Date : {{pr.timeinfo.date | secondsToDateTime | date:'yyyy-MM-dd HH:mm:ss' }} <br />
+	            		<span ng-if="pr.timeinfo.firstFinish">
+	            			First Finish : {{pr.timeinfo.firstFinish | secondsToDateTime | date:'yyyy-MM-dd HH:mm:ss' }}<br /> 
+	            		</span>
+	            		<span ng-if="pr.timeinfo.enterZoneVelocity">
+	            			Start velocity : {{pr.timeinfo.enterZoneVelocity}} u/s<br />
+	            		</span>
+	            		<span ng-if="pr.timeinfo.leaveZoneVelocity">
+	            			End velocity : {{pr.timeinfo.leaveZoneVelocity}} u/s<br />
+	            		</span>
+	            		<span ng-if="pr.timeinfo.averageVelocity">
+	            			Average velocity : {{pr.timeinfo.averageVelocity}} u/s<br />
+	            		</span>
+	            		Completions : {{pr.timeinfo.completions}}
+	            		<br /><br /><a ng-click="report($index)" ng-if="canReport" href="">Report</a>
+	            	</div>
+	            	<div ng-if="!pr.timeinfo.duration">
+	            		Not completed yet
+	            	</div>
+            	</div>
+            </div>
+    	</div>
+    </div>
+    <div class="col-md-12" ng-if="toggleReport && canReport">
+    	<div style="margin-top:15px;">
+	    	<textarea rows="5" class="commentarea" ng-model="form.reason" placeholder="Reason of that report...">
+			</textarea>
+			<button ng-click="sendReport()" class="sendbtn">Report</button>
+		</div>
+    </div>
+</div>

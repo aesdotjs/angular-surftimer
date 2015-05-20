@@ -10,15 +10,15 @@
     },
     {
       "command": "!bonus",
-      "desc": "Teleports you to a bonus in the map.  Usage: !bonus (Abbreviation: !b)"
+      "desc": "Teleports you to a bonus in the map.  <br />Usage: !bonus (Abbreviation: !b)"
     },
     {
       "command": "!broken",
-      "desc": "Displays player's recently broken records.\n  Usage: !broken [target] (Abbreviation: !rb)"
+      "desc": "Displays player's recently broken records.<br />  Usage: !broken [target] (Abbreviation: !rb)"
     },
     {
       "command": "!btop",
-      "desc": "Displays top times in a bonus.  Usage: !btop [mapname]  Example: !btop surf_lessons"
+      "desc": "Displays top times in a bonus.  <br />Usage: !btop [mapname]  <br />Example: !btop surf_lessons"
     },
     {
       "command": "!ctop",
@@ -30,23 +30,23 @@
     },
     {
       "command": "!cp",
-      "desc": "Displays player's current zone.  Usage: !cp [target]"
+      "desc": "Displays player's current zone.  <br />Usage: !cp [target]"
     },
     {
       "command": "!cpr",
-      "desc": "Displays compare personal record menu.  Usage: !cpr [target/@maprank] [mapname]  Example: !cpr @10 surf_lessons"
+      "desc": "Displays compare personal record menu.  <br />Usage: !cpr [target/@maprank] [mapname]  <br />Example: !cpr @10 surf_lessons"
     },
     {
       "command": "!crank",
-      "desc": "Displays player's country rank in chat.  Usage: !crank [target]"
+      "desc": "Displays player's country rank in chat.  <br />Usage: !crank [target]"
     },
     {
       "command": "!getloc",
-      "desc": "Gets a player's location.  Usage: !getloc [target]"
+      "desc": "Gets a player's location.  <br />Usage: !getloc [target]"
     },
     {
       "command": "!goback",
-      "desc": "Teleports you back one stage.  Usage: !goback (Abbreviation: !gb)"
+      "desc": "Teleports you back one stage.  <br />Usage: !goback (Abbreviation: !gb)"
     },
     {
       "command": "!community",
@@ -62,7 +62,7 @@
     },
     {
       "command": "!incomplete",
-      "desc": "Displays player's completion menu.  Usage: !incomplete [target]"
+      "desc": "Displays player's completion menu.  <br />Usage: !incomplete [target]"
     },
     {
       "command": "!info",
@@ -74,19 +74,19 @@
     },
     {
       "command": "!lookup",
-      "desc": "Search for a player by name.  Usage: !lookup [name]  Example: !lookup Absolute"
+      "desc": "Search for a player by name.  <br />Usage: !lookup [name]  <br />Example: !lookup Absolute"
     },
     {
       "command": "!lookupsteamid",
-      "desc": "Search for a player by steamid.  Usage: !lookupsteamid [steamid]  Example: !lookupsteamid STEAM_0:0:4442884"
+      "desc": "Search for a player by steamid.  <br />Usage: !lookupsteamid [steamid]  <br />Example: !lookupsteamid STEAM_0:0:4442884"
     },
     {
       "command": "!m",
-      "desc": "Displays map information in chat.  Usage: !m [mapname]  Example: !m surf_lessons"
+      "desc": "Displays map information in chat.  <br />Usage: !m [mapname]  <br />Example: !m surf_lessons"
     },
     {
       "command": "!mapinfo",
-      "desc": "Displays map information menu.  Usage: !mapinfo [mapname] (Abbreviation: !mi)  Example: !mi surf_lessons"
+      "desc": "Displays map information menu.  <br />Usage: !mapinfo [mapname] (Abbreviation: !mi)  <br />Example: !mi surf_lessons"
     },
     {
       "command": "!maplist",
@@ -102,15 +102,15 @@
     },
     {
       "command": "!mrank",
-      "desc": "Displays player's map rank in chat.  Usage: !mrank [target/@rank] [mapname]  Example: !mrank @10 surf_lessons"
+      "desc": "Displays player's map rank in chat.  <br />Usage: !mrank [target/@rank] [mapname]  <br />Example: !mrank @10 surf_lessons"
     },
     {
       "command": "!mtop",
-      "desc": "Displays main map menu.  Usage: !mtop [mapname]  Example: !mtop surf_lessons"
+      "desc": "Displays main map menu.  <br />Usage: !mtop [mapname]  <br />Example: !mtop surf_lessons"
     },
     {
       "command": "!next",
-      "desc": "Displays next player's menu.  Usage: !next [target/@rank]  Example: !next @10"
+      "desc": "Displays next player's menu.  <br />Usage: !next [target/@rank]  <br />Example: !next @10"
     },
     {
       "command": "!noclip",
@@ -122,19 +122,19 @@
     },
     {
       "command": "!pc",
-      "desc": "Displays player's percent completion.  Usage: !pc [target]"
+      "desc": "Displays player's percent completion.  <br />Usage: !pc [target]"
     },
     {
       "command": "!player",
-      "desc": "Displays player's rank menu.  Usage: !player [target/@rank] (Abbreviation: !p)"
+      "desc": "Displays player's rank menu.  <br />Usage: !player [target/@rank] (Abbreviation: !p)"
     },
     {
       "command": "!playerinfo",
-      "desc": "Displays player's information menu.  Usage: !playerinfo [target/@rank] (Abbreviation: !pi)"
+      "desc": "Displays player's information menu.  <br />Usage: !playerinfo [target/@rank] (Abbreviation: !pi)"
     },
     {
       "command": "!playtime",
-      "desc": "Displays player's playtime in chat.  Usage: !playtime [target/@rank]  Example: !playtime @10"
+      "desc": "Displays player's playtime in chat.  <br />Usage: !playtime [target/@rank]  <br />Example: !playtime @10"
     },
     {
       "command": "!points",
@@ -142,11 +142,11 @@
     },
     {
       "command": "!pr",
-      "desc": "Displays player's personal record on a map.  Usage: !pr [target/@maprank] [mapname]  Example: !pr @10 surf_lessons"
+      "desc": "Displays player's personal record on a map.  <br />Usage: !pr [target/@maprank] [mapname]  <br />Example: !pr @10 surf_lessons"
     },
     {
       "command": "!rank",
-      "desc": "Displays player's rank in chat.  Usage: !rank [target/@rank]  Example: !rank @10"
+      "desc": "Displays player's rank in chat.  <br />Usage: !rank [target/@rank]  <br />Example: !rank @10"
     },
     {
       "command": "!ranks",
@@ -186,11 +186,11 @@
     },
     {
       "command": "!saveloc",
-      "desc": "Saves your location.  Usage: !saveloc [<origin x y z><angle p y r><velocity x y z>]"
+      "desc": "Saves your location.  <br />Usage: !saveloc [<origin x y z><angle p y r><velocity x y z>]"
     },
     {
       "command": "!search",
-      "desc": "Search the command list for the given string of text.  Usage: !search [text]"
+      "desc": "Search the command list for the given string of text.  <br />Usage: !search [text]"
     },
     {
       "command": "!settings",
@@ -198,11 +198,11 @@
     },
     {
       "command": "!spec",
-      "desc": "Spectate specific player.  Usage: !spec [target]"
+      "desc": "Spectate specific player.  <br />Usage: !spec [target]"
     },
     {
       "command": "!specinfo",
-      "desc": "Displays player's spectators.  Usage: !specinfo [target]"
+      "desc": "Displays player's spectators.  <br />Usage: !specinfo [target]"
     },
     {
       "command": "!speed",
@@ -210,11 +210,11 @@
     },
     {
       "command": "!stage",
-      "desc": "Teleports you to a stage in the map and enables practice mode.  Usage: !stage (Abbreviation: !s)"
+      "desc": "Teleports you to a stage in the map and enables practice mode.  <br />Usage: !stage (Abbreviation: !s)"
     },
     {
       "command": "!surftop",
-      "desc": "Displays top player's by points.  Usage: !surftop (Abbreviation: !st)"
+      "desc": "Displays top player's by points.  <br />Usage: !surftop (Abbreviation: !st)"
     },
     {
       "command": "!teleport",
@@ -222,7 +222,7 @@
     },
     {
       "command": "!tele",
-      "desc": "Teleports to location.  Usage: !tele [#location]  Example: !tele #10"
+      "desc": "Teleports to location.  <br />Usage: !tele [#location]  <br />Example: !tele #10"
     },
     {
       "command": "!thetime",
@@ -250,7 +250,7 @@
     },
     {
       "command": "!top",
-      "desc": "Displays top times in a map.  Usage: !top [mapname]  Example: !top surf_lessons"
+      "desc": "Displays top times in a map.  <br />Usage: !top [mapname]  <br />Example: !top surf_lessons"
     },
     {
       "command": "!toptop10",
@@ -266,11 +266,11 @@
     },
     {
       "command": "!wr",
-      "desc": "Displays the WR on a map.  Usage: !wr [mapname]  Example: !wr surf_lessons"
+      "desc": "Displays the WR on a map.  <br />Usage: !wr [mapname]  <br />Example: !wr surf_lessons"
     },
     {
       "command": "!wrb",
-      "desc": "Displays the WRB on a map.  Usage: !wrb [#bonusnumber] [mapname]  Example: !wrb #2 surf_lessons"
+      "desc": "Displays the WRB on a map.  <br />Usage: !wrb [#bonusnumber] [mapname]  <br />Example: !wrb #2 surf_lessons"
     },
     {
       "command": "!youtube",
