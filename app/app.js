@@ -1,8 +1,12 @@
-var app = angular.module('surftimer', ['ngRoute','ngProgress','ngAnimate','ngSanitize','btford.markdown','ui.comments','angularMoment','xeditable','matchMedia']);
+
+var app = angular.module('surftimer', ['ngRoute','ngProgress','ngAnimate','ngSanitize','btford.markdown','ui.comments','angularMoment','xeditable','matchMedia','angular-carousel'], function ($compileProvider) {
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|steam):/);
+});
 
 app.controller('mainCtrl',['$scope','services','ngProgress','screenSize', function ($scope, services, ngProgress, screenSize) {
   ngProgress.start();
   ngProgress.height('3px');
+  ngProgress.color('#12709F');
   $scope.desktop = screenSize.on('sm, md, lg', function(match){
     $scope.desktop = match;
   });
@@ -45,6 +49,7 @@ app.controller('errorCtrl',['$scope','errorService','$timeout', function ($scope
 app.config(function ($httpProvider) {
   $httpProvider.interceptors.push('interceptorNgProgress');
 });
+
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider
@@ -117,6 +122,16 @@ app.config(['$routeProvider',
         title: 'Nightmare surf statitics - News ',
         templateUrl: 'partials/news.html',
         controller: 'newsCtrl'
+      })
+      .when('/report/', {
+        title: 'Nightmare surf statitics - Record Reports ',
+        templateUrl: 'partials/reportspage.html',
+        controller: 'reportsPageCtrl'
+      })
+      .when('/report/:id', {
+        title: 'Nightmare surf statitics - Record Report ',
+        templateUrl: 'partials/report.html',
+        controller: 'reportCtrl'
       })
       .when('/pr/:mapid/:playerid', {
         title: 'Nightmare surf statitics - Personal Records',

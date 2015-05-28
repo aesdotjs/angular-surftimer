@@ -10,7 +10,7 @@ app.controller('serverCtrl',['$scope','services', function ($scope, services) {
 	{
 		services.getServerInfo($scope.servers[i].serverinfo.address,$scope.servers[i].serverinfo.port).then(function(data){
 	  	    $scope.servers[i].info=angular.copy(data.data.info);
-	  	    $scope.servers[i].players=angular.copy(data.data.players);
+	  	    $scope.servers[i].players=angular.copy(data.data.players.splice(3,data.data.players.length));
 	  	    $scope.servers[i].rules=angular.copy(data.data.rules);
 	  	    services.searchMap($scope.servers[i].info.Map).then(function(data){
 		    	$scope.servers[i].mapid=data.data.id;

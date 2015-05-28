@@ -1,0 +1,70 @@
+<div class="row report">
+	<div class="col-md-12">
+        <div class="row view-header newspage">
+            <div class="col-md-12">
+                <h1>Report #{{reportRow.id}}: {{reportRow.rpname}} on {{reportRow.mname}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+    	<div class="report">
+    		<div class="mapwidget">
+	    		<div class="title col-md-12">
+	    			<a ng-href="#/report/{{reportRow.id}}" class="pull-left">
+	    				Report #{{reportRow.id}}
+	    			</a>
+	    			<div class="pull-right comment-date">Reported by
+		    			<a ng-href="#/player/{{reportRow.player_id}}">
+		    				{{reportRow.pname}}
+		    			</a>
+		    			<span am-time-ago="reportRow.date | secondsToDateTime"></span>
+		    		</div>
+	    		</div>
+	    		<div class="col-md-12">
+	    			<a ng-href="#/player/{{reportRow.reported_player_id}}">
+	    				{{reportRow.rpname}}
+	    			</a> on 
+	    			<a ng-href="#/map/{{reportRow.map_id}}">{{reportRow.mname}}</a>
+	    			<span ng-if="reportRow.run_id > 0">Bonus {{reportRow.run_id}}</span>
+	    			<span ng-if="reportRow.stage_id > 0">{{reportRow.sname}}</span>
+	    			with time <a ng-href="#/pr/{{reportRow.map_id}}/{{reportRow.reported_player_id}}">{{reportRow.duration | secondsToDateTime | date:'mm:ss.sss'}}</a>
+	    		</div>
+
+	    		<div btf-markdown="reportRow.reason" class="col-md-12"></div>
+	    		<div class="editcont pull-left" ng-if="isAdmin" class="col-xs-6">
+	    			<div class="col-xs-3">
+	    				<button class="btn btn-primary btn-xs" ng-click="delete()">Delete</button>
+	    			</div>
+	    			<div class="col-xs-3 col-xs-offset-1">
+	    				<button class="btn btn-primary btn-xs" ng-hide="$form.$visible" editable-select="form.status" buttons="no" e-ng-options="s.value as s.text for s in statuses" class="pull-right">Change status</button>
+	    			</div>
+	    		</div>
+	    		<div class="comment-date pull-right">
+		    		Status : 
+		    		<span ng-if="form.finalstatus==0">Pending</span>
+		    		<span ng-if="form.finalstatus==1">Action taken</span>
+		    		<span ng-if="form.finalstatus==2">No action taken</span>
+		    	</div>
+	    	</div>
+    	</div>
+    </div>
+    <div class="col-md-12" ng-controller="commentsCtrl">
+        <div class="row commentcont"  ng-if="canComment">
+            <div class="col-md-6">
+                <h2>Comment</h2>
+                <form>
+                    <textarea rows="5" class="commentarea" ng-model="form.newcomment" placeholder="Comment that news... (You can use Markdown)">
+                    </textarea>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2>Post Preview</h2>
+                <div class="postpreview"  btf-markdown="form.newcomment"></div>
+            </div>
+            <div class="col-md-12">
+                <button ng-click="sendComment()" class="sendbtn">Send</button>
+            </div>
+        </div>
+        <comments comment-data="comments"></comments>
+    </div>
+</div>

@@ -119,7 +119,7 @@ app.factory("services", ['$http', function($http) {
     return $http.get(serviceBase + 'prinfo?playerid='+playerid+'&mapid='+mapid);
   }
   obj.getOnlinePlayers = function(){
-    return $http.get(serviceBase + 'onlineplayers');
+    return $http.get(serviceBase + 'onlineplayers&noprogress');
   }
   obj.addReport = function(body,reportedpid,mapid,runid,stageid,duration){
     return $http.post(serviceBase+'addreport',{
@@ -208,6 +208,44 @@ app.factory("news", ['$http', function($http) {
   };
   return obj;   
 }]);
+app.factory("chat", ['$http', function($http) {
+  var serviceBase = 'services/';
+  var obj = {};
+  obj.getChatPage = function(page){
+    return $http.get(serviceBase + 'chatpage?page='+page);
+  }
+  obj.addMessage = function(body){
+    return $http.post(serviceBase+'addmessage',{
+      'message' : body
+    });
+  };
+  obj.pollChat = function(lastid){
+    return $http.get(serviceBase + 'pollchat?lastid='+lastid+'&noprogress');
+  };
+  return obj;   
+}]);
+app.factory("report", ['$http', function($http) {
+  var serviceBase = 'services/';
+  var obj = {};
+  obj.getReport = function(reportid){
+    return $http.get(serviceBase + 'report?id='+reportid);
+  }
+  obj.getReportsPage = function(page){
+    return $http.get(serviceBase + 'reports?page='+page);
+  }
+  obj.delReport = function(reportid){
+    return $http.post(serviceBase+'delreport',{
+      reportid : reportid
+    });
+  }
+  obj.changeStatus = function(reportid,status){
+    return $http.post(serviceBase+'updatereport',{
+      reportid : reportid,
+      status : status
+    });
+  }
+  return obj;   
+}]);
 app.factory("comment", ['$http','$rootScope','$routeParams','$location', function($http,$rootScope,$routeParams,$location) {
   var serviceBase = 'services/';
   var obj = {};
@@ -219,6 +257,9 @@ app.factory("comment", ['$http','$rootScope','$routeParams','$location', functio
   obj.getComments = function(){
     obj.getTypeId();
     return $http.get(serviceBase + 'comments?type='+obj.type+'&itemid='+obj.itemId);
+  };  
+  obj.pollComments = function(lastid){
+    return $http.get(serviceBase + 'pollcomments?type='+obj.type+'&itemid='+obj.itemId+'&lastid='+lastid+'&noprogress');
   };
   obj.getLatestComments = function(page){
      return $http.get(serviceBase + 'latestcomments?page='+page);

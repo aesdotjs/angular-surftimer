@@ -324,9 +324,46 @@ ul.timelist .timediff{
 	padding:25px;
 }
 .newslist{
-	max-height:330px;
+	height:330px;
 	overflow-x:hidden;
 	overflow-y:auto;
+}
+.chatcont{
+	height:330px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	background:url(../img/pat.png);
+}
+.chatcont .msg-container{
+	border: 1px solid #4D4E50;
+	margin-top: 10px;
+	background-color: #1F1F1F;
+	overflow:hidden;
+}
+
+.chatcont .playerinfo{
+	padding-left:20px;
+	padding-top:5px;
+	border-right: 1px solid #4D4E50;
+	margin-bottom: -99999px;
+	padding-bottom: 99999px;
+}
+.chatcont img{
+	width:40px;
+	height:40px;
+	border-radius:5px;
+}
+.chatcont .playerconnect{
+	background-color:#16330E;
+	padding: 5px 10px;
+}
+.chatcont .mapchange{
+	background-color: #170F30;
+	padding: 5px 10px;
+}
+.inputdark.chat-input{
+	width:100%;
+	margin-top:10px;
 }
 .singlenews{
 	overflow:hidden;
@@ -622,7 +659,9 @@ button.expand>span{
 	padding:10px;
 	font-family:'quicksand';
 }
-
+.report .mapwidget{
+	padding-bottom:10px;
+}
 .playerpoints{
 	font-family:"Audiowide";
 	text-align:center;
@@ -1218,6 +1257,13 @@ textarea.editable-input{
 	-ms-transform: rotate(180deg);
 	transform: rotate(180deg);
 }
+ul.slide{
+	height: 380px;
+}
+ul.slide > li {
+    color:#eee!important;
+}
+
 @media screen and (max-width: 767px) {
   .row-offcanvas {
     position: relative;

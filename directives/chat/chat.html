@@ -1,0 +1,72 @@
+<div class="row chat-window">
+  <div class="col-xs-12 col-md-12">
+    <div class="stwidget">
+      <div class="title">
+        Cross-Server Chat
+      </div>
+      <div class="chat-body">
+        <div class="chatcont" scrolllist-reverse>
+          <div class="row msg-container widgetanim" ng-repeat="message in vm.messages | reverse">
+            <div ng-switch="message.type">
+               <div ng-switch-when="0">
+                <div class="message" ng-if="message.text">
+                  <div class="col-md-4 col-xs-4 playerinfo">
+                    <a ng-href="#/player/{{message.player_id}}"><img ng-src="{{message.avatarUrl}}"/>
+                    <span class="chat-msg-author">{{message.pname}}</span></a><br />
+                    <span class="comment-date" am-time-ago="message.date | secondsToDateTime"></span>
+                  </div>
+                  <div class="col-md-8 col-xs-8">
+                    <div class="chat-msg">
+                      <p ng-bind-html="message.text"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div ng-switch-when="1">
+                <div class="col-md-12 col-xs-12">
+                  <div class="playerconnect">
+                    <a ng-href="#/player/{{message.player_id}}"><img ng-src="{{message.avatarUrl}}"/>
+                    <span class="chat-msg-author">{{message.pname}}</span></a>
+                    Connected to <server-string server="message.server"></server-string> server.
+                    <span class="comment-date" am-time-ago="message.date | secondsToDateTime"></span>
+                  </div>
+                </div>
+              </div>
+              <div ng-switch-when="2">
+                <div class="col-md-12 col-xs-12">
+                  <div class="playerconnect">
+                    <a ng-href="#/player/{{message.player_id}}"><img ng-src="{{message.avatarUrl}}"/>
+                    <span class="chat-msg-author">{{message.pname}}</span></a>
+                    Disconnected from <server-string server="message.server"></server-string> server.
+                    <span class="comment-date" am-time-ago="message.date | secondsToDateTime"></span>
+                  </div>
+                </div>
+              </div>
+              <div ng-switch-when="3">
+                <div class="col-md-12 col-xs-12">
+                  <div class="mapchange">
+                    <server-string server="message.server"></server-string> server map changed to
+                    <a ng-href="#/map/{{message.map_id}}">
+                      {{message.mname}}
+                    </a>
+                    <span class="comment-date" am-time-ago="message.date | secondsToDateTime"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sendbox" ng-if="vm.canChat">
+        <form style="display:inherit" ng-submit="vm.submitMessage()">
+          <div class="col-xs-8">
+            <input type="text" class="inputdark chat-input" placeholder="Write your message..." ng-model="vm.newMessage"/>
+          </div>
+          <div class="col-xs-4">
+            <button class="sendbtn">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

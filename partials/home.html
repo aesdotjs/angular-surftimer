@@ -25,27 +25,27 @@
         </div>        
     </div>
     <div class="col-md-4">
-        <div class="stwidget">
-            <div class="title">Top players</div>
-            <div class="values">
-                <span>Name</span>
-                <span>Points</span>
-                <span>Rank</span>
-            </div>
-            <div class="timelistcont">
-                <ul class="timelist">
-                    <li ng-repeat="time in widget.players">
-                        <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
-                        <span class="time">{{time.totalpoints}}</span>
-                        <span class="rank">{{ $index+1 }}</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-4">
+        <ul class="slide" rn-carousel rn-carousel-auto-slide="5" rn-carousel-transition="fadeAndSlide"  rn-carousel-duration="500">
+            <li>
+                <div class="stwidget">
+                    <div class="title">Top players</div>
+                    <div class="values">
+                        <span>Name</span>
+                        <span>Points</span>
+                        <span>Rank</span>
+                    </div>
+                    <div class="timelistcont">
+                        <ul class="timelist">
+                            <li ng-repeat="time in widget.players">
+                                <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                                <span class="time">{{time.totalpoints}}</span>
+                                <span class="rank">{{ $index+1 }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li>
                 <div class="stwidget">
                     <div class="title">Top WR</div>
                     <div class="values">
@@ -63,8 +63,8 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
+            </li>
+            <li>
                 <div class="stwidget">
                     <div class="title">Top WRCP</div>
                     <div class="values">
@@ -82,8 +82,8 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
+            </li>
+            <li>
                 <div class="stwidget">
                     <div class="title">Top WRB</div>
                     <div class="values">
@@ -101,61 +101,69 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
+            </li>
+        </ul>
     </div>
     <div class="col-md-12">
         <div class="row">
-            <div class="col-md-4">
-                <div class="stwidget">
-                    <div class="title">Last Played Map</div>
-                    <div class="values">
-                        <span>Name</span>
-                        <span>Last connection</span>
-                    </div>
-                    <div class="timelistcont">
-                        <ul class="timelist">
-                            <li ng-repeat="time in widget.lastplayed">
-                                <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
-                                <span class="time" am-time-ago="time.lastconnection | secondsToDateTime"></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="col-md-8">
+                <aes-chat>
+                </aes-chat>
             </div>
             <div class="col-md-4">
-                <div class="stwidget">
-                    <div class="title">Most Played Map</div>
-                    <div class="values">
-                        <span>Name</span>
-                        <span>Time Played</span>
-                    </div>
-                    <div class="timelistcont">
-                        <ul class="timelist">
-                            <li ng-repeat="time in widget.mostplayed">
-                                <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
-                                <span class="time">{{time.timeontheserver| secondsToDateTime | amDifference : nulldate : 'Hours'}} Hours</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stwidget">
-                    <div class="title">Most Contested Map</div>
-                    <div class="values">
-                        <span>Name</span>
-                        <span>Contested</span>
-                    </div>
-                    <div class="timelistcont">
-                        <ul class="timelist">
-                            <li ng-repeat="time in widget.mostcontested">
-                                <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
-                                <span class="time">{{time.contested}}</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <ul class="slide" rn-carousel rn-carousel-auto-slide="5" rn-carousel-transition="fadeAndSlide" rn-carousel-duration="500">
+                    <li>
+                        <div class="stwidget">
+                            <div class="title">Last Played Map</div>
+                            <div class="values">
+                                <span>Name</span>
+                                <span>Last connection</span>
+                            </div>
+                            <div class="timelistcont">
+                                <ul class="timelist">
+                                    <li ng-repeat="time in widget.lastplayed">
+                                        <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                                        <span class="time" am-time-ago="time.lastconnection | secondsToDateTime"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="stwidget">
+                            <div class="title">Most Played Map</div>
+                            <div class="values">
+                                <span>Name</span>
+                                <span>Time Played</span>
+                            </div>
+                            <div class="timelistcont">
+                                <ul class="timelist">
+                                    <li ng-repeat="time in widget.mostplayed">
+                                        <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                                        <span class="time">{{time.timeontheserver| secondsToDateTime | amDifference : nulldate : 'Hours'}} Hours</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="stwidget">
+                            <div class="title">Most Contested Map</div>
+                            <div class="values">
+                                <span>Name</span>
+                                <span>Contested</span>
+                            </div>
+                            <div class="timelistcont">
+                                <ul class="timelist">
+                                    <li ng-repeat="time in widget.mostcontested">
+                                        <a ng-href="#/map/{{time.id}}">{{time.name | limitTo:20:0}}</a>
+                                        <span class="time">{{time.contested}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>                        
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

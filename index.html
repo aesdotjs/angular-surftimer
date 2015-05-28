@@ -7,6 +7,7 @@
     <link href="css/normalize.min.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
     <link href="css/ngProgress.css" rel="stylesheet">
+    <link href="css/angular-carousel.min.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Lato:400|Audiowide:400" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
     <title>Nightmare surf statistics</title>
@@ -27,7 +28,7 @@
                     <a ng-if="!logged" ng-click="login()" href="services/login" target="_blank" class="steamlogin"><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png"/></a> 
                     <div class="user row" ng-if="logged">
                         <div class="name">
-                            <a ng-href="#/player/{{user.playerid}}" class="pull-right"> <img src="{{user.avatarmedium}}"/></a>
+                            <a ng-href="#/player/{{user.playerid}}" class="pull-right"> <img ng-src="{{user.avatarmedium}}"/></a>
                             <div class="info pull-right">
                                 <a ng-href="#/player/{{user.playerid}}" class="pull-right">                      
                                     <span>
@@ -69,6 +70,7 @@
                             </ul>
                         </li>
                         <li ng-class="menuClass('pr')"><a ng-href="#/pr">Personal Records</a></li>
+                        <li ng-class="menuClass('report')"><a ng-href="#/report">Record Reports</a></li>
                         <li ng-class="menuClass('server')"><a ng-href="#/server">Server</a></li>
                         <li ng-class="menuClass('rules')"><a ng-href="#/rules">Rules</a></li>
                         <li ng-class="menuClass('commands')"><a ng-href="#/commands">Commands</a></li>
@@ -81,7 +83,7 @@
                     <div class="user row" ng-if="logged">
                         <div class="name col-md-12">
                             <div class="row">
-                                <a ng-href="#/player/{{user.playerid}}" class="col-xs-3"> <img src="{{user.avatar}}"/></a>
+                                <a ng-href="#/player/{{user.playerid}}" class="col-xs-3"> <img ng-src="{{user.avatar}}"/></a>
                                 <div class="info pull-left">
                                     <a ng-href="#/player/{{user.playerid}}">                      
                                         <span>
@@ -152,13 +154,13 @@
                             <li ng-repeat="record in brokenRecords" class="widgetanim">
                                 <div ng-if="record.stageid>0" class="stage">
                                     <a ng-href="#/player/{{record.playerid}}">{{record.playername}}</a>
-                                    has lost {{record.stagename}} WRCP on 
+                                    has broken {{record.stagename}} WRCP on 
                                     <a ng-href="#/map/{{record.mapid}}/{{record.playerid}}">{{record.mapname}}</a>
                                     <span class="comment-date" am-time-ago="record.date | secondsToDateTime"></span>
                                 </div>
                                 <div ng-if="record.runID>0" class="bonus">
                                     <a ng-href="#/player/{{record.playerid}}">{{record.playername}}</a>
-                                    has lost Bonus {{record.runID}} WRB on 
+                                    has broken Bonus {{record.runID}} WRB on 
                                     <a ng-href="#/map/{{record.mapid}}/{{record.playerid}}">{{record.mapname}}</a>
                                     <span class="comment-date" am-time-ago="record.date | secondsToDateTime"></span>
                                 </div>
@@ -195,6 +197,8 @@
     <script src="js/angular-moment.min.js"></script>
     <script src="js/xeditable.min.js"></script>
     <script src="js/match-media.js"></script>
+    <script src="js/angular-touch.min.js"></script>
+    <script src="js/angular-carousel.min.js"></script>
     <script src="app/app.js"></script>
     <script src="app/filters.js"></script>
     <script src="app/services.js"></script>
@@ -207,6 +211,9 @@
     <script src="app/menu.js"></script>
     <script src="app/comment.js"></script>
     <script src="app/news.js"></script>
-    <script src="app/prinfo.js"></script>  
+    <script src="app/prinfo.js"></script>
+    <script src="app/report.js"></script>
+    <script src="directives/general/general.js"></script>
+    <script src="directives/chat/chat.js"></script>
 </body>
 </html>

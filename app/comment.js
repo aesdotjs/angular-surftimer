@@ -1,10 +1,11 @@
-app.controller('commentsCtrl',['$scope','comment','user', function ($scope, comment, user) {
+app.controller('commentsCtrl',['$scope','comment','user','$interval', function ($scope, comment, user, $interval) {
   $scope.comments=[];
   $scope.sending=false;
   $scope.maxcomment=5;
   $scope.form={};
   $scope.playerid=user.user.playerid;
   $scope.canComment=$scope.playerid>0;
+  $scope.lastid=0;
   $scope.$on('user:updated', function(event,data) {
      $scope.playerid = user.user.playerid;
      $scope.canComment=$scope.playerid>0;
@@ -13,9 +14,15 @@ app.controller('commentsCtrl',['$scope','comment','user', function ($scope, comm
      $scope.playerid = 0;
      $scope.canComment=false;
   });
-  comment.getComments().then(function(data){
-    $scope.comments=angular.copy(data.data);
-  });
+  $scope.fetchComments = function(){
+    comment.getComments().then(function(data){
+      $scope.comments=angular.copy(data.data);
+      angular.forEach($scope.comments,function(commentl,key){
+        $scope.lastid= commentl.comment_id > $scope.lastid?commentl.comment_id:$scope.lastid;
+      });
+    });
+  };
+  
   $scope.sendComment = function(){
     if($scope.sending===false && $scope.form.newcomment && $scope.form.newcomment.length>3)
     {
@@ -27,7 +34,6 @@ app.controller('commentsCtrl',['$scope','comment','user', function ($scope, comm
         {          
           if(row.error)
           {
-            console.log(row.error)
             return;
           }
           if(row.comment_id)
@@ -40,7 +46,15 @@ app.controller('commentsCtrl',['$scope','comment','user', function ($scope, comm
       });
     }
   };
- 
+  var poll = $interval(function(){
+    comment.pollComments($scope.lastid).then(function(data){
+      if(data.data === 1)
+      {
+          $scope.fetchComments();     
+      }
+    });
+  },30000);
+  $scope.fetchComments();
 }]);
 app.controller('commentCtrl',['$scope','comment','user', function ($scope, comment, user) {
   $scope.toggleRespond=false;
