@@ -97,82 +97,16 @@
                         </div>                      
                     </div>
                 </div>
-                <div class="col-md-12" ng-controller="onlinePlayersCtrl" ng-cloak>
-                    <div ng-if="players.length > 0">
-                        <h2 class="activitytitle">Online Players</h2>
-                        <div class="activitycont">
-                            <div class="playerscont">
-                                <span ng-repeat="player in players">
-                                    <a ng-href="#/player/{{player.player_id}}">{{player.name}}</a>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-12" ng-cloak>
+                    <widget-online-players></widget-online-players>
                 </div>
-                <div class="col-md-12" ng-controller="activityCtrl">
+                <div class="col-md-12">
                     <h2 class="activitytitle">Live Activity</h2>
-                    <div class="activitycont" scrolllist>
-                        <ul class="activity">
-                            <li ng-repeat="activity in activities" class="widgetanim">
-                                <div ng-if="activity.stageid>0" class="stage">
-                                    <a ng-href="#/player/{{activity.playerid}}">{{activity.playername}}</a>
-                                    has beaten {{activity.stagename}} WRCP on 
-                                    <a ng-href="#/map/{{activity.mapid}}/{{activity.playerid}}">{{activity.mapname}}</a>
-                                    <span class="comment-date" am-time-ago="activity.date | secondsToDateTime"></span>
-                                </div>
-                                <div ng-if="activity.runID>0" class="bonus">
-                                    <a ng-href="#/player/{{activity.playerid}}">{{activity.playername}}</a>
-                                    has beaten Bonus {{activity.runID}} WRB on 
-                                    <a ng-href="#/map/{{activity.mapid}}/{{activity.playerid}}">{{activity.mapname}}</a>
-                                    <span class="comment-date" am-time-ago="activity.date | secondsToDateTime"></span>
-                                </div>
-                                <div ng-if="activity.runID===0 && activity.stageid===null" class="map">
-                                    <a ng-href="#/player/{{activity.playerid}}">{{activity.playername}}</a>
-                                    <span ng-if="activity.isFirstFinish&&activity.isWR==0&&activity.isTop10==0">
-                                        has finished
-                                    </span>
-                                    <span ng-if="activity.isWR">
-                                        has beaten the map record on
-                                    </span>
-                                    <span ng-if="activity.isTop10">
-                                        has finished in Top 10 on
-                                    </span>
-                                    <a ng-href="#/map/{{activity.mapid}}/{{activity.playerid}}">{{activity.mapname}}</a>
-                                    <span ng-if="activity.isFirstFinish&&activity.isWR==0&&activity.isTop10==0">
-                                        for the first time.
-                                    </span>
-                                    <span class="comment-date" am-time-ago="activity.date | secondsToDateTime"></span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <widget-live-activity></widget-live-activity>
                 </div>             
-                <div class="col-md-12" ng-controller="recentlyBrokenCtrl">
+                <div class="col-md-12">
                     <h2 class="activitytitle">Recent Broken Records</h2>
-                    <div class="activitycont" scrolllist>
-                        <ul class="activity">
-                            <li ng-repeat="record in brokenRecords" class="widgetanim">
-                                <div ng-if="record.stageid>0" class="stage">
-                                    <a ng-href="#/player/{{record.playerid}}">{{record.playername}}</a>
-                                    has broken {{record.stagename}} WRCP on 
-                                    <a ng-href="#/map/{{record.mapid}}/{{record.playerid}}">{{record.mapname}}</a>
-                                    <span class="comment-date" am-time-ago="record.date | secondsToDateTime"></span>
-                                </div>
-                                <div ng-if="record.runID>0" class="bonus">
-                                    <a ng-href="#/player/{{record.playerid}}">{{record.playername}}</a>
-                                    has broken Bonus {{record.runID}} WRB on 
-                                    <a ng-href="#/map/{{record.mapid}}/{{record.playerid}}">{{record.mapname}}</a>
-                                    <span class="comment-date" am-time-ago="record.date | secondsToDateTime"></span>
-                                </div>
-                                <div ng-if="record.runID===0 && record.stageid===null" class="map">
-                                    <a ng-href="#/player/{{record.playerid}}">{{record.playername}}</a>
-                                    has beaten the map record on
-                                    <a ng-href="#/map/{{record.mapid}}/{{record.playerid}}">{{record.mapname}}</a>
-                                    <span class="comment-date" am-time-ago="record.date | secondsToDateTime"></span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <widget-recently-broken></widget-recently-broken>
                 </div>
             </div>
             <div class="col-xs-12 col-md-9 col-sm-9">
@@ -181,10 +115,7 @@
             </div>
         </div>
     </div>
-    <div class="alert alert-danger alert-fixed" role="alert" ng-controller="errorCtrl" ng-show="toggle">
-        <span>{{error}}</span>
-        <button ng-show="toggle" class="pull-right" ng-click="empty()"><span>&times;</span></button>
-    </div>
+    <alert-bar></alert-bar>
     <script src="js/angular.min.js"></script>
     <script src="js/angular-animate.min.js"></script>
     <script src="js/angular-route.min.js"></script>
@@ -215,5 +146,10 @@
     <script src="app/report.js"></script>
     <script src="directives/general/general.js"></script>
     <script src="directives/chat/chat.js"></script>
+    <script src="directives/comment/comment.js"></script>
+    <script src="directives/alertbar/alertbar.js"></script>
+    <script src="directives/widgetliveactivity/widgetliveactivity.js"></script>
+    <script src="directives/widgetrecentlybroken/widgetrecentlybroken.js"></script>
+    <script src="directives/widgetrecentlybroken/widgetonlineplayers.js"></script>
 </body>
 </html>

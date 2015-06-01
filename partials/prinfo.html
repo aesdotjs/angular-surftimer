@@ -49,11 +49,11 @@
 	            		<span ng-if="pr.timeinfo.firstFinish">
 	            			First Finish : {{pr.timeinfo.firstFinish | secondsToDateTime | date:'yyyy-MM-dd HH:mm:ss' }}<br /> 
 	            		</span>
-	            		<span ng-if="pr.timeinfo.enterZoneVelocity">
-	            			Start velocity : {{pr.timeinfo.enterZoneVelocity}} u/s<br />
-	            		</span>
 	            		<span ng-if="pr.timeinfo.leaveZoneVelocity">
-	            			End velocity : {{pr.timeinfo.leaveZoneVelocity}} u/s<br />
+	            			Start velocity : {{pr.timeinfo.leaveZoneVelocity}} u/s<br />
+	            		</span>
+	            		<span ng-if="pr.timeinfo.enterZoneVelocity">
+	            			End velocity : {{pr.timeinfo.enterZoneVelocity}} u/s<br />
 	            		</span>
 	            		<span ng-if="pr.timeinfo.averageVelocity">
 	            			Average velocity : {{pr.timeinfo.averageVelocity}} u/s<br />

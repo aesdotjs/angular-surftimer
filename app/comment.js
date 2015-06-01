@@ -1,62 +1,4 @@
-app.controller('commentsCtrl',['$scope','comment','user','$interval', function ($scope, comment, user, $interval) {
-  $scope.comments=[];
-  $scope.sending=false;
-  $scope.maxcomment=5;
-  $scope.form={};
-  $scope.playerid=user.user.playerid;
-  $scope.canComment=$scope.playerid>0;
-  $scope.lastid=0;
-  $scope.$on('user:updated', function(event,data) {
-     $scope.playerid = user.user.playerid;
-     $scope.canComment=$scope.playerid>0;
-  });
-  $scope.$on('user:logout', function(event,data) {
-     $scope.playerid = 0;
-     $scope.canComment=false;
-  });
-  $scope.fetchComments = function(){
-    comment.getComments().then(function(data){
-      $scope.comments=angular.copy(data.data);
-      angular.forEach($scope.comments,function(commentl,key){
-        $scope.lastid= commentl.comment_id > $scope.lastid?commentl.comment_id:$scope.lastid;
-      });
-    });
-  };
-  
-  $scope.sendComment = function(){
-    if($scope.sending===false && $scope.form.newcomment && $scope.form.newcomment.length>3)
-    {
-      $scope.sending=true;
-      comment.addComment($scope.form.newcomment,0).then(function(data){
-        $scope.sending=false;
-        var row=data.data;
-        if(row)
-        {          
-          if(row.error)
-          {
-            return;
-          }
-          if(row.comment_id)
-          {
-            data.data.comment=$scope.form.newcomment;
-            $scope.comments.unshift(data.data);
-            $scope.form.newcomment="";
-          }
-        }      
-      });
-    }
-  };
-  var poll = $interval(function(){
-    comment.pollComments($scope.lastid).then(function(data){
-      if(data.data === 1)
-      {
-          $scope.fetchComments();     
-      }
-    });
-  },30000);
-  $scope.fetchComments();
-}]);
-app.controller('commentCtrl',['$scope','comment','user', function ($scope, comment, user) {
+app.controller('commentCtrl',['$scope','comment','user','$rootScope', function ($scope, comment, user, $rootScope) {
   $scope.toggleRespond=false;
   $scope.form={};
   $scope.sending=false;
@@ -95,6 +37,7 @@ app.controller('commentCtrl',['$scope','comment','user', function ($scope, comme
             $scope.comment.children.unshift(data.data);
             $scope.toggleRespond=false;
             $scope.form.newresponse="";
+            $rootScope.$broadcast('comment:new',row.comment_id);
           }
         }      
       });

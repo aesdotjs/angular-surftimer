@@ -1,0 +1,10 @@
+<div ng-if="players.length > 0">
+    <h2 class="activitytitle">Online Players</h2>	
+	<div class="activitycont">
+	    <div class="playerscont">
+	        <span ng-repeat="player in players">
+	            <a ng-href="#/player/{{player.player_id}}">{{player.name}}</a>
+	        </span>
+	    </div>
+	</div>
+</div>

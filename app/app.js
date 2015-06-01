@@ -27,24 +27,6 @@ app.controller('commandsCtrl',['$scope','services','$routeParams', function ($sc
   });
 }]);
 
-app.controller('errorCtrl',['$scope','errorService','$timeout', function ($scope, errorService, $timeout) {
-  $scope.error="";
-  $scope.toggle=false;
-  $scope.empty = function(){
-    $scope.toggle=false;
-    $scope.error="";
-    errorService.delError();
-  }
-  $scope.$watch( function () { return errorService.error; }, function ( errorstring ) {
-    if(errorstring.length>0 && errorstring != $scope.error)
-    {
-      $scope.error = errorstring;
-      $scope.toggle=true;
-      $timeout(function(){$scope.empty();},10000);
-    }
-  });
-}]);
-
 
 app.config(function ($httpProvider) {
   $httpProvider.interceptors.push('interceptorNgProgress');

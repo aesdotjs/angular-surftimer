@@ -1,0 +1,35 @@
+<div class="activitycont" scrolllist>
+    <ul class="activity">
+        <li ng-repeat="activity in activities" class="widgetanim">
+            <div ng-if="activity.stageid>0" class="stage">
+                <a ng-href="#/player/{{activity.playerid}}">{{activity.playername}}</a>
+                has beaten {{activity.stagename}} WRCP on 
+                <a ng-href="#/map/{{activity.mapid}}/{{activity.playerid}}">{{activity.mapname}}</a>
+                <span class="comment-date" am-time-ago="activity.date | secondsToDateTime"></span>
+            </div>
+            <div ng-if="activity.runID>0" class="bonus">
+                <a ng-href="#/player/{{activity.playerid}}">{{activity.playername}}</a>
+                has beaten Bonus {{activity.runID}} WRB on 
+                <a ng-href="#/map/{{activity.mapid}}/{{activity.playerid}}">{{activity.mapname}}</a>
+                <span class="comment-date" am-time-ago="activity.date | secondsToDateTime"></span>
+            </div>
+            <div ng-if="activity.runID===0 && activity.stageid===null" class="map">
+                <a ng-href="#/player/{{activity.playerid}}">{{activity.playername}}</a>
+                <span ng-if="activity.isFirstFinish&&activity.isWR==0&&activity.isTop10==0">
+                    has finished
+                </span>
+                <span ng-if="activity.isWR">
+                    has beaten the map record on
+                </span>
+                <span ng-if="activity.isTop10">
+                    has finished in Top 10 on
+                </span>
+                <a ng-href="#/map/{{activity.mapid}}/{{activity.playerid}}">{{activity.mapname}}</a>
+                <span ng-if="activity.isFirstFinish&&activity.isWR==0&&activity.isTop10==0">
+                    for the first time.
+                </span>
+                <span class="comment-date" am-time-ago="activity.date | secondsToDateTime"></span>
+            </div>
+        </li>
+    </ul>
+</div>

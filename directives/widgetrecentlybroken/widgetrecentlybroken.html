@@ -1,0 +1,24 @@
+<div class="activitycont" scrolllist>
+    <ul class="activity">
+        <li ng-repeat="record in brokenRecords" class="widgetanim">
+            <div ng-if="record.stageid>0" class="stage">
+                <a ng-href="#/player/{{record.playerid}}">{{record.playername}}</a>
+                has broken {{record.stagename}} WRCP of 
+                <a ng-href="#/map/{{record.mapid}}/{{record.playerid}}">{{record.mapname}}</a> with time <a ng-href="#/pr/{{record.mapid}}/{{record.playerid}}"  class="time">{{record.duration | secondsToDateTime | date:'mm:ss.sss'}}</a> on <server-string server="record.server"></server-string>
+                <span class="comment-date" am-time-ago="record.date | secondsToDateTime"></span>
+            </div>
+            <div ng-if="record.runID>0" class="bonus">
+                <a ng-href="#/player/{{record.playerid}}">{{record.playername}}</a>
+                has broken Bonus {{record.runID}} WRB of 
+                <a ng-href="#/map/{{record.mapid}}/{{record.playerid}}">{{record.mapname}}</a> with time <a ng-href="#/pr/{{record.mapid}}/{{record.playerid}}"  class="time">{{record.duration | secondsToDateTime | date:'mm:ss.sss'}}</a> on <server-string server="record.server"></server-string>
+                <span class="comment-date" am-time-ago="record.date | secondsToDateTime"></span>
+            </div>
+            <div ng-if="record.runID===0 && record.stageid===null" class="map">
+                <a ng-href="#/player/{{record.playerid}}">{{record.playername}}</a>
+                has beaten the map record of
+                <a ng-href="#/map/{{record.mapid}}/{{record.playerid}}">{{record.mapname}}</a> with time <a ng-href="#/pr/{{record.mapid}}/{{record.playerid}}"  class="time">{{record.duration | secondsToDateTime | date:'mm:ss.sss'}}</a> on <server-string server="record.server"></server-string>
+                <span class="comment-date" am-time-ago="record.date | secondsToDateTime"></span>
+            </div>
+        </li>
+    </ul>
+</div>

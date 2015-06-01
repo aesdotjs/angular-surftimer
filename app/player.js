@@ -163,14 +163,17 @@ app.controller('playerCtrl',['$scope','services','$routeParams','$location', fun
       services.getPlaceAmount(currentid,1,0,false).then(function(data){
         $scope.player.topbonus = data.data.amount||0;
       });
+      /* THIS NEED TO BE FIXED IN THE TIMER
       services.getPlaceAmount(currentid,0,0,true).then(function(data){
         $scope.player.topstage = data.data.amount||0;
-      });
+      });*/
       services.getMapWorldRecords(currentid).then(function(data){
         $scope.player.recordsmaplist = data.data;
       });
       services.getStageWorldRecords(currentid).then(function(data){
         $scope.player.recordsstagelist = data.data;
+        //FIX to place amount
+        $scope.player.topstage=$scope.player.recordsstagelist.length;
       });
       services.getBonusWorldRecords(currentid).then(function(data){
         $scope.player.recordsbonuslist = data.data;
