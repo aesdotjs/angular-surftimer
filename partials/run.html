@@ -1,0 +1,51 @@
+<div class="row">
+	<div class="col-md-12">
+        <div class="row view-header map">
+        	<div class="col-md-12">
+        		<h1>Search Run</h1>
+        	</div>
+        </div>
+    </div>
+    <div class="row prinfosearch">
+	    <div class="col-md-6">
+	    	<input ng-model="searchMap" class="inputdark aligncenter" placeholder="Search a Map..."/>
+	    	<div class="row">
+	    		<div ng-repeat="map in maps" class="col-xs-6 widgetanim">
+	        		<div class="mapwidget option" ng-class="mapClass(map.id)" ng-click="setMap(map.id)">
+	        			<div class="title">{{map.name}}</div>
+	        		</div>
+	        	</div>
+	    	</div>
+	    </div>
+	    <div class="col-md-6">
+	    	<input ng-model="searchPlayer" class="inputdark aligncenter" placeholder="Search a Player..."/>
+	    	<div class="row">
+	    		<div ng-repeat="player in players" class="col-xs-6 widgetanim">
+	        		<div class="mapwidget option" ng-class="playerClass(player.id)" ng-click="setPlayer(player.id)">
+	        			<div class="title">{{player.name}}</div>
+	        		</div>
+	        	</div>
+	    	</div>
+	    </div>
+	    <div class="col-md-6 col-md-offset-3">
+	    	<input ng-model="form.addPlayer" class="inputdark aligncenter" placeholder="Compare with another player"/>
+	    	<div class="row">
+	    		<div ng-repeat="player in addplayers" class="col-xs-6 widgetanim">
+	        		<div class="mapwidget option" ng-class="player2Class(player.id)" ng-click="setPlayer2(player.id)">
+	        			<div class="title">{{player.name}}</div>
+	        		</div>
+	        	</div>
+	    	</div>
+	    </div>
+	</div>
+	<div class="col-md-12" ng-if="runInfo.length > 0">
+        <div class="row view-header map">
+        	<div class="col-md-12">
+        		<h1>Run info of {{player.info.name}} on {{map.info.name}}</h1>
+        	</div>
+        </div>
+    </div>
+    <div class="col-md-12" ng-if="runInfo.length > 0">
+    	<div google-chart chart="chartObject" style="height:auto; width:100%;"></div>
+    </div>	
+</div>

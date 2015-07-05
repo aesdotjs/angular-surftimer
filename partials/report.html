@@ -2,7 +2,7 @@
 	<div class="col-md-12">
         <div class="row view-header newspage">
             <div class="col-md-12">
-                <h1>Report #{{reportRow.id}}: {{reportRow.rpname}} on {{reportRow.mname}}</h1>
+                <h1>{{reportRow.type}} Report #{{reportRow.id}}: {{reportRow.rpname}} on {{reportRow.mname}}</h1>
             </div>
         </div>
     </div>
@@ -20,16 +20,26 @@
 		    			<span am-time-ago="reportRow.date | secondsToDateTime"></span>
 		    		</div>
 	    		</div>
-	    		<div class="col-md-12">
+	    		<div class="col-md-12" ng-if="reportRow.type ==='time'">
 	    			<a ng-href="#/player/{{reportRow.reported_player_id}}">
-	    				{{reportRow.rpname}}
+	    				{{report.rpname}}
 	    			</a> on 
 	    			<a ng-href="#/map/{{reportRow.map_id}}">{{reportRow.mname}}</a>
-	    			<span ng-if="reportRow.run_id > 0">Bonus {{reportRow.run_id}}</span>
+	    			<span ng-if="report.run_id > 0">Bonus {{reportRow.run_id}}</span>
 	    			<span ng-if="reportRow.stage_id > 0">{{reportRow.sname}}</span>
 	    			with time <a ng-href="#/pr/{{reportRow.map_id}}/{{reportRow.reported_player_id}}">{{reportRow.duration | secondsToDateTime | date:'mm:ss.sss'}}</a>
 	    		</div>
-
+	    		<div class="col-md-12" ng-if="reportRow.type ==='map'">
+	    			Reported map : <a ng-href="#/map/{{reportRow.map_id}}">{{reportRow.mname}}</a>
+	    		</div>
+	    		<div class="col-md-12" ng-if="reportRow.type ==='player'">
+	    			Reported Player : <a ng-href="#/player/{{reportRow.reported_player_id}}">
+	    				{{reportRow.rpname}}
+	    			</a>
+	    		</div>
+	    		<div class="col-md-12" ng-if="reportRow.screenshot">
+	    			<a target="_blank" href="{{reportRow.screenshot}}">Screenshot</a>
+	    		</div>
 	    		<div btf-markdown="reportRow.reason" class="col-md-12"></div>
 	    		<div class="editcont pull-left" ng-if="isAdmin" class="col-xs-6">
 	    			<div class="col-xs-3">

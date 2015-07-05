@@ -1,7 +1,12 @@
-app.controller('reportsPageCtrl',['$scope','report', function ($scope, report) {
+app.controller('reportsPageCtrl',['$scope','report','user','services', function ($scope, report, user, services) {
   $scope.reports=[];
   $scope.page=1;
   $scope.end=false;
+  $scope.canReport=false;
+  $scope.working=false;
+  $scope.form={};
+  $scope.form.item={};
+  $scope.items=[];
   $scope.loadMore = function(){
   	report.getReportsPage($scope.page).then(function(data){
   		if(data.data[0])
@@ -16,7 +21,87 @@ app.controller('reportsPageCtrl',['$scope','report', function ($scope, report) {
   		  $scope.end=true;
   	});
   }
+  $scope.sendReport = function(){
+    if(!$scope.canReport || $scope.working || !$scope.form.item.id || !$scope.form.reason) return;
+    var i=$scope.reportIndex;
+    $scope.working=true;
+    services.addReport($scope.form.reason,($scope.form.type === 'player'?$scope.form.item.id:0),
+      ($scope.form.type === 'map'?$scope.form.item.id:0),0,0,0,
+      $scope.form.type, $scope.form.screenshot).then(function(data){
+      if(data.data.success)
+      {
+        $scope.form={};
+        $scope.form.item={};
+        $scope.items=[];
+      }
+      $scope.working=false;
+    });
+  }
+  $scope.reportRight = function(){
+    user.canReport().then(function(data){
+      if(data.data===1){
+        $scope.canReport = true;
+      }
+    });
+  }
+  $scope.itemClass = function(itemid){
+    if($scope.form.item.id===itemid)
+      return 'valid';
+  }
+  $scope.setType = function(type){
+    $scope.form.type = type;
+  }
+  $scope.typeClass = function(type){
+    if($scope.form.type===type)
+      return 'valid';
+  }
+  $scope.setItem = function(itemid){
+    $scope.form.item.id = itemid;
+  }
+  $scope.$watch('form.searchItem', function (tmpStr)
+  {
+    if (!tmpStr || tmpStr.length == 0)
+    {
+      $scope.players=[];
+      return 0;
+    }
+    setTimeout(function() {
+
+      // if searchStr is still the same..
+      // go ahead and retrieve the data
+      if (tmpStr === $scope.form.searchItem)
+      {
+        if($scope.form.type === "player")
+        {
+          services.searchPlayers($scope.form.searchItem).then(function(data){
+            if(data.data && !data.data.error)
+            {
+              $scope.items = angular.copy(data.data);
+            }
+          });
+        }
+        else if($scope.form.type === "map")
+        {
+          services.searchMaps($scope.form.searchItem).then(function(data){
+            if(data.data && !data.data.error)
+            {
+              $scope.items = angular.copy(data.data);
+            }
+          });
+        }
+      }
+    }, 500);
+  });
+  $scope.$on('user:updated', function(event,data) {
+     $scope.you = user.user.playerid;
+     $scope.reportRight();
+  });
+  $scope.$on('user:logout', function(event,data) {
+     $scope.you = 0;
+     $scope.canReport=false;
+  });
   $scope.loadMore();
+  $scope.reportRight();
 }]);
 
 app.controller('reportCtrl',['$scope','report','user','$routeParams','$location', function ($scope, report, user,$routeParams,$location) {

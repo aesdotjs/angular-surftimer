@@ -40,8 +40,8 @@
                     <div class="timelistcont" scrolllist="0">
                         <ul class="timelist">
                             <li ng-repeat="time in player.completemaplist | orderBy:name | filter:searchTime1 | limitTo:max[0]" class="listanim">
-                                <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name}}</a>
-                                <a ng-href="#/pr/{{time.id}}/{{player.id}}"  class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</a> 
+                                <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name | limitTo:17:0}}</a>
+                                <a ng-href="#/run/{{time.id}}/{{player.id}}"  class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</a> 
                             </li>
                         </ul>
                     </div>
@@ -60,7 +60,7 @@
                     <div class="timelistcont" scrolllist="1">
                         <ul class="timelist">
                             <li ng-repeat="time in player.completestagelist | orderBy: name | filter:searchTime2 | limitTo:max[1]" class="listanim">
-                                <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name}}</a>
+                                <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name | limitTo:17:0}}</a>
                                 <span>{{time.sname}}</span>
                                 <a ng-href="#/pr/{{time.id}}/{{player.id}}"  class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</a> 
                             </li>
@@ -81,7 +81,7 @@
                     <div class="timelistcont" scrolllist="2">
                         <ul class="timelist">
                             <li ng-repeat="time in player.completebonuslist | orderBy:name | filter:searchTime3 | limitTo:max[2]" class="listanim">
-                                <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name}}</a>
+                                <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name | limitTo:17:0}}</a>
                                 <span>B{{time.runID}}</span>
                                 <a ng-href="#/pr/{{time.id}}/{{player.id}}"  class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</a> 
                             </li>
@@ -104,7 +104,7 @@
     </div>
     <div class="col-md-12">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="stwidget">
                     <div class="title wr">WR Map</div>
                     <div class="values">
@@ -115,14 +115,14 @@
                         <ul class="timelist">
                             <li ng-repeat="time in player.recordsmaplist | filter:searchTime4 | limitTo:max[3]" class="listanim">
                                 <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name}}</a>
-                                <a ng-href="#/pr/{{time.id}}/{{player.id}}"  class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</a> 
+                                <a ng-href="#/run/{{time.id}}/{{player.id}}"  class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</a> 
                             </li>
                         </ul>
                     </div>
                     <input ng-model="searchTime4" class="inputdark aligncenter" placeholder="Search Time..."/>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="stwidget">
                     <div class="title stage">WR Stage</div>
                     <div class="values">
@@ -141,7 +141,7 @@
                     <input ng-model="searchTime5" class="inputdark aligncenter" placeholder="Search Time..."/>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="stwidget">
                     <div class="title bonus">WR Bonus</div>
                     <div class="values">
@@ -158,6 +158,24 @@
                         </ul>
                     </div>
                     <input ng-model="searchTime6" class="inputdark aligncenter" placeholder="Search Time..."/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="stwidget">
+                    <div class="title wr">Top 10</div>
+                    <div class="values">
+                        <span>{{player.totalTop10}} Top10</span>
+                        <span>{{player.totalpoints - player.totalmappoints - player.topmap*250 - player.topstage*25 - player.topbonus*100}} Points</span>
+                    </div>
+                    <div class="timelistcont" scrolllist="6">
+                        <ul class="timelist">
+                            <li ng-repeat="time in player.top10List | filter:searchTime7 | limitTo:max[6]" class="listanim">
+                                <a ng-href="#/map/{{time.id}}/{{player.id}}">{{time.name}}</a>
+                                <span>#{{time.place}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <input ng-model="searchTime7" class="inputdark aligncenter" placeholder="Search Time..."/>
                 </div>
             </div>
         </div>

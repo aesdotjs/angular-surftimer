@@ -42,7 +42,7 @@ app.controller('prinfoCtrl',['$scope','user','$routeParams','services', function
     $scope.working=true;
     services.addReport($scope.form.reason,$scope.player.playerid,
     $scope.map.mapid,$scope.prinfo[i].runID,$scope.prinfo[i].stageid,
-    $scope.prinfo[i].timeinfo.duration).then(function(data){
+    $scope.prinfo[i].timeinfo.duration,'time', null).then(function(data){
       if(data.data.success)
       {
         $scope.toggleReport=false;

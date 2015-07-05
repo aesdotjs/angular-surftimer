@@ -35,7 +35,16 @@ a,a:focus {
 #page{ margin-top:67px;}
 #ng-view{color:#eee;}
 #ng-view>.row{padding-bottom:15px;}
-
+.icon-emoticon {
+    font-family: "emoticons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+}
 
 .menu-cont{
 	min-height: 100%;
@@ -64,12 +73,14 @@ a,a:focus {
 	transition:all 400ms ease;
 	font-family:'Quicksand',Arial;
 	display:block;
+	text-decoration:none;
 }
 .menu-left > li >input{
 	margin-top:-37px;
 	margin-right:5px;
 }
-.menu-left > li:hover > a,.menu-left > li.active > a{
+.menu-left > li:hover > a,.menu-left > li.active > a
+,.menu-left > li:focus > a{
 	color:#12709F;
 	text-decoration:none;
 }
@@ -340,7 +351,9 @@ ul.timelist .timediff{
 	background-color: #1F1F1F;
 	overflow:hidden;
 }
-
+.chatcont .chat-msg{
+	padding:5px 5px;
+}
 .chatcont .playerinfo{
 	padding-left:20px;
 	padding-top:5px;
@@ -348,7 +361,7 @@ ul.timelist .timediff{
 	margin-bottom: -99999px;
 	padding-bottom: 99999px;
 }
-.chatcont img{
+.chatcont img.avatarmin{
 	width:40px;
 	height:40px;
 	border-radius:5px;

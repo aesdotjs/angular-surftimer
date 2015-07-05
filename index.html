@@ -8,6 +8,7 @@
     <link href="css/app.css" rel="stylesheet">
     <link href="css/ngProgress.css" rel="stylesheet">
     <link href="css/angular-carousel.min.css" rel="stylesheet">
+    <link href="css/ng-embed.min.css" rel="stylesheet">    
     <link href="http://fonts.googleapis.com/css?family=Lato:400|Audiowide:400" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
     <title>Nightmare surf statistics</title>
@@ -70,11 +71,14 @@
                             </ul>
                         </li>
                         <li ng-class="menuClass('pr')"><a ng-href="#/pr">Personal Records</a></li>
-                        <li ng-class="menuClass('report')"><a ng-href="#/report">Record Reports</a></li>
+                        <li ng-class="menuClass('run')"><a ng-href="#/run">Run info</a></li>
+                        <li ng-class="menuClass('report')"><a ng-href="#/report">Reports</a></li>
                         <li ng-class="menuClass('server')"><a ng-href="#/server">Server</a></li>
                         <li ng-class="menuClass('rules')"><a ng-href="#/rules">Rules</a></li>
                         <li ng-class="menuClass('commands')"><a ng-href="#/commands">Commands</a></li>
                         <li ng-class="menuClass('donate')"><a ng-href="#/donate">Donate</a></li>
+                        <li><a href="http://www.forum.nightmare-surf.com/index.php" target="_blank">Forum</a></li>
+                        <li><a href="https://www.youtube.com/user/NightmareSurf" target="_blank">Youtube</a></li>
                         <li ng-class="menuClass('credits')"><a ng-href="#/credits">Credits</a></li>
                     </ul>
                 </nav>
@@ -130,6 +134,8 @@
     <script src="js/match-media.js"></script>
     <script src="js/angular-touch.min.js"></script>
     <script src="js/angular-carousel.min.js"></script>
+    <script src="js/ng-embed.min.js"></script>
+    <script src="js/ng-google-chart.js"></script>
     <script src="app/app.js"></script>
     <script src="app/filters.js"></script>
     <script src="app/services.js"></script>
@@ -143,6 +149,7 @@
     <script src="app/comment.js"></script>
     <script src="app/news.js"></script>
     <script src="app/prinfo.js"></script>
+    <script src="app/run.js"></script>
     <script src="app/report.js"></script>
     <script src="directives/general/general.js"></script>
     <script src="directives/chat/chat.js"></script>
@@ -150,6 +157,6 @@
     <script src="directives/alertbar/alertbar.js"></script>
     <script src="directives/widgetliveactivity/widgetliveactivity.js"></script>
     <script src="directives/widgetrecentlybroken/widgetrecentlybroken.js"></script>
-    <script src="directives/widgetrecentlybroken/widgetonlineplayers.js"></script>
+    <script src="directives/widgetonlineplayers/widgetonlineplayers.js"></script>
 </body>
 </html>

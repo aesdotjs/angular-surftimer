@@ -1,43 +1,87 @@
 <div class="row reportspage" scroll>
+	<div class="col-md-12" ng-if="canReport">
+        <div class="row view-header newspage">
+            <div class="col-md-12">
+                <h1>Add report</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" ng-if="canReport">
+    	<div class="col-xs-2">
+    		<div class="plan" ng-click="setType('map')" ng-class="typeClass('map')">Map</div>
+    	</div>
+    	<div class="col-xs-2">
+    		<div class="plan" ng-click="setType('player')" ng-class="typeClass('player')">Player</div>
+    	</div>
+		<div class="col-xs-8">
+	    	<input ng-model="form.searchItem" class="inputdark aligncenter" placeholder="Search..."/>
+	    	<div class="row">
+	    		<div ng-repeat="item in items" class="col-xs-6 widgetanim">
+	        		<div class="mapwidget option" ng-class="itemClass(item.id)" ng-click="setItem(item.id)">
+	        			<div class="title">{{item.name}}</div>
+	        		</div>
+	        	</div>
+	    	</div>
+	    </div>
+	    <div class="col-md-12">
+	    	<br />
+	    	<textarea rows="5" class="commentarea" ng-model="form.reason" placeholder="Reason of that report...">
+			</textarea><br />
+			<input ng-model="form.screenshot" class="inputdark aligncenter" placeholder="Enter screenshot URL..."/>
+			<button ng-click="sendReport()" class="sendbtn">Report</button>
+	    </div>
+    </div>
 	<div class="col-md-12">
         <div class="row view-header newspage">
             <div class="col-md-12">
-                <h1>Recent reported record</h1>
+                <h1>Recent report</h1>
             </div>
         </div>
     </div>
     <div class="col-md-12">
-    	<div class="col-md-6 report" ng-repeat="report in reports">
-    		<div class="mapwidget">
-	    		<div class="title col-md-12">
-	    			<a ng-href="#/report/{{report.id}}" class="pull-left">
-	    				Report #{{report.id}}
-	    			</a>
-	    			<div class="pull-right comment-date">Reported by
-		    			<a ng-href="#/player/{{report.player_id}}">
-		    				{{report.pname}}
+    	<div class="row" ng-repeat="report in reports" ng-if="$index % 2 == 0">
+	    	<div class="col-md-6 report" ng-repeat="report in reports.slice($index, $index+2)">
+	    		<div class="mapwidget">
+		    		<div class="title col-md-12">
+		    			<a ng-href="#/report/{{report.id}}" class="pull-left">
+		    				{{report.type}} report #{{report.id}}
 		    			</a>
-		    			<span am-time-ago="report.date | secondsToDateTime"></span>
+		    			<div class="pull-right comment-date">Reported by
+			    			<a ng-href="#/player/{{report.player_id}}">
+			    				{{report.pname}}
+			    			</a>
+			    			<span am-time-ago="report.date | secondsToDateTime"></span>
+			    		</div>
 		    		</div>
-	    		</div>
-	    		<div class="col-md-12">
-	    			<a ng-href="#/player/{{report.reported_player_id}}">
-	    				{{report.rpname}}
-	    			</a> on 
-	    			<a ng-href="#/map/{{report.map_id}}">{{report.mname}}</a>
-	    			<span ng-if="report.run_id > 0">Bonus {{report.run_id}}</span>
-	    			<span ng-if="report.stage_id > 0">{{report.sname}}</span>
-	    			with time <a ng-href="#/pr/{{report.map_id}}/{{report.reported_player_id}}">{{report.duration | secondsToDateTime | date:'mm:ss.sss'}}</a>
-	    		</div>
-
-	    		<div btf-markdown="report.reason" class="col-md-12"></div>
-	    		<div class="comment-date pull-right" ng-if="!isAdmin">
-		    		Status : 
-		    		<span ng-if="report.status==0">Pending</span>
-		    		<span ng-if="report.status==1">Action taken</span>
-		    		<span ng-if="report.status==2">No action taken</span>
+		    		<div class="col-md-12" ng-if="report.type ==='time'">
+		    			<a ng-href="#/player/{{report.reported_player_id}}">
+		    				{{report.rpname}}
+		    			</a> on 
+		    			<a ng-href="#/map/{{report.map_id}}">{{report.mname}}</a>
+		    			<span ng-if="report.run_id > 0">Bonus {{report.run_id}}</span>
+		    			<span ng-if="report.stage_id > 0">{{report.sname}}</span>
+		    			with time <a ng-href="#/pr/{{report.map_id}}/{{report.reported_player_id}}">{{report.duration | secondsToDateTime | date:'mm:ss.sss'}}</a>
+		    		</div>
+		    		<div class="col-md-12" ng-if="report.type ==='map'">
+		    			Reported map : <a ng-href="#/map/{{report.map_id}}">{{report.mname}}</a>
+		    		</div>
+		    		<div class="col-md-12" ng-if="report.type ==='player'">
+		    			Reported Player : <a ng-href="#/player/{{report.reported_player_id}}">
+		    				{{report.rpname}}
+		    			</a>
+		    		</div>
+		    		<div btf-markdown="report.reason" class="col-md-12"></div>
+		    		<div class="col-md-12" ng-if="report.screenshot">
+		    			<a target="_blank" href="{{report.screenshot}}">Screenshot</a>
+		    		</div>
+		    		<div class="comment-date pull-right" ng-if="!isAdmin">
+			    		Status : 
+			    		<span ng-if="report.status==0">Pending</span>
+			    		<span ng-if="report.status==1">Action taken</span>
+			    		<span ng-if="report.status==2">No action taken</span>
+			    	</div>
 		    	</div>
 	    	</div>
-    	</div>
+	    </div>
     </div>
 </div>

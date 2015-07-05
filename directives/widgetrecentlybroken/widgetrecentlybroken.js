@@ -52,7 +52,7 @@
         services.getRecentlyBroken(1,$scope.lastid,1).then(function(data){
           if(data.data.length)
           {
-            for(i=data.data.length-1;i>=0;i--)
+            for(var i=data.data.length-1;i>=0;i--)
             {
               $scope.brokenRecords.unshift(data.data[i]);
             }          

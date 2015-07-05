@@ -28,6 +28,9 @@ app.factory("services", ['$http', function($http) {
   obj.getTop10PlaceAmount = function(playerID){
     return $http.get(serviceBase + 'top10placeamount?id=' + playerID);
   }
+  obj.getTop10Maps = function(playerID){
+    return $http.get(serviceBase + 'top10maps?id=' + playerID);
+  }
   obj.getPlaceAmount = function(playerID,runID,place,stage){
     return $http.get(serviceBase + 'placeamount?id=' + playerID+'&runid='+runID+'&place='+place+'&stage='+stage);
   }
@@ -118,12 +121,17 @@ app.factory("services", ['$http', function($http) {
   obj.getPrinfo = function(playerid,mapid){
     return $http.get(serviceBase + 'prinfo?playerid='+playerid+'&mapid='+mapid);
   }
+  obj.getRunInfo = function(playerid,mapid){
+    return $http.get(serviceBase + 'runinfo?playerid='+playerid+'&mapid='+mapid);
+  }
   obj.getOnlinePlayers = function(){
     return $http.get(serviceBase + 'onlineplayers&noprogress');
   }
-  obj.addReport = function(body,reportedpid,mapid,runid,stageid,duration){
+  obj.addReport = function(body,reportedpid,mapid,runid,stageid,duration,type,screenshot){
     return $http.post(serviceBase+'addreport',{
       'report' : body,
+      'type' : type,
+      'screenshot' : screenshot,
       'reported_player_id' : reportedpid,
       'map_id' : mapid,
       'runid' : runid,

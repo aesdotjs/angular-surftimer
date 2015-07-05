@@ -1,5 +1,5 @@
 
-var app = angular.module('surftimer', ['ngRoute','ngProgress','ngAnimate','ngSanitize','btford.markdown','ui.comments','angularMoment','xeditable','matchMedia','angular-carousel'], function ($compileProvider) {
+var app = angular.module('surftimer', ['ngRoute','ngProgress','ngAnimate','ngSanitize','btford.markdown','ui.comments','angularMoment','xeditable','matchMedia','angular-carousel','ngEmbed','googlechart'], function ($compileProvider) {
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|steam):/);
 });
 
@@ -124,6 +124,16 @@ app.config(['$routeProvider',
         title: 'Nightmare surf statitics - Personal Records',
         templateUrl: 'partials/prinfo.html',
         controller: 'prinfoCtrl'
+      })
+      .when('/run/:mapid/:playerid', {
+        title: 'Nightmare surf statitics - Run info',
+        templateUrl: 'partials/run.html',
+        controller: 'runCtrl'
+      })
+      .when('/run/', {
+        title: 'Nightmare surf statitics - Run info',
+        templateUrl: 'partials/run.html',
+        controller: 'runCtrl'
       })
       .otherwise({
         redirectTo: '/'

@@ -25,7 +25,7 @@
                 <ul class="timelist">
                     <li ng-repeat="time in map.times | filter:searchMap | limitTo:mapmax" class="listanim">
                         <a ng-href="#/player/{{time.id}}">{{time.name | limitTo:20:0}}</a>
-                        <a ng-href="#/pr/{{mapid}}/{{time.id}}" class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</a>
+                        <a ng-href="#/run/{{mapid}}/{{time.id}}" class="time">{{time.duration | secondsToDateTime | date:'mm:ss.sss'}}</a>
                         <span>
                             <span class="timediff" ng-if="time.timediff>0"> +{{time.timediff+0.001 | secondsToDateTime | date:'mm:ss.sss'}}</span>
                         </span>

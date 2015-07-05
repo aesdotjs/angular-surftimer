@@ -64,7 +64,7 @@ app.controller('playersCtrl',['$scope','services','$routeParams', function ($sco
 
 app.controller('playerCtrl',['$scope','services','$routeParams','$location', function ($scope, services, $routeParams,$location) {
   var currentid=$routeParams.id;
-  $scope.max=[50,50,50,50,50,50];
+  $scope.max=[50,50,50,50,50,50,50];
   $scope.loadMore = function(nb){
     if(nb===-1){
       if(!$scope.endSet)
@@ -155,7 +155,11 @@ app.controller('playerCtrl',['$scope','services','$routeParams','$location', fun
         });
       });
       services.getTop10PlaceAmount(currentid).then(function(data){
-        $scope.player.totaltop10 = data.data.am;
+        $scope.player.totalTop10 = data.data.am;
+      });
+      services.getTop10Maps(currentid).then(function(data){
+        $scope.player.top10List = data.data;
+
       });
       services.getPlaceAmount(currentid,0,1,false).then(function(data){
         $scope.player.topmap = data.data.amount||0;
